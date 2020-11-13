@@ -4,8 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find My Church</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 <body>
-    
+<div id="wrapper">
+    <div id="header">
+        <h1>Find My Church</h1>
+        <a href="/church_reg">Church Registration</a>
+    </div>
+    <h3>Having a hard time finding a home church? Then you have found the right place!</h3>
+    <div id="reg">
+        <h2>Registration</h2>
+        
+        <form action="/create_user" method="post" >
+            {% csrf_token %}
+            First Name:<input type="text" name="first_name"id="reg_form"></br>
+            Last Name:<input type="text" name="last_name"id="reg_form"></br>
+            Email Address:<input type="email" name="email"id="reg_form"></br>
+            Password:<input type="password" name="password"id="reg_form"></br>
+            Confirm Password:<input type="password" name="conf_password"id="reg_form"></br>
+            <input type="submit" value="Register"id="reg_form">
+        </form>
+    </div>
+    <div id="login">
+        <h2>Login</h2>
+        <form action="/login" method="post" id="login_form">
+            {% csrf_token %}
+            Email: <input type="email" name="email"id="login_form"></br>
+            Password: <input type="password" name="password"id="login_form"></br>
+            <input type="submit" value="Login"id="login_form">
+        </form>
+    </div>
+    {% if messages %}
+        {% for error in messages %}
+        <p id="errors">{{error}}</p>
+        {% endfor %}
+    {% endif %}
+</div>
 </body>
 </html>
