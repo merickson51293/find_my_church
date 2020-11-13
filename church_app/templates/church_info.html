@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+</head>
+<body>
+    <h1>Thank you {{request.session.admin_name}} for registering {{request.session.church_name}} at CommunityChurchFinder.com</h1>
+    <h2>Please tell us about {{request.session.church_name}}</h2>
+        <p>Admin Name: {{request.session.admin_name}}</p>
+        <p>Admin Email: {{request.session.admin_email}}</p>
+    <form action="post">
+        {% csrf_token %}
+        <p>Senior Pastor Name: <input type="text" name="pastor"></p>
+        <p>Senior Pastor Contact Info: <input type="text" name="pastor_contact"></p>
+        <p>City and State: <input type="text" name="city_state"></p>
+        <p>Address: <input type="text" name="address"></p>
+        <p>Denomination: <input type="text" name="denomination"></p>
+        <p>Size of Church: </p>
+        <input type="radio" name="size" value="small">
+        <label for="small">1-100</label><br>
+        <input type="radio" name="size" value="medium">
+        <label for="medium">101-500</label><br>
+        <input type="radio" name="size" value="large">
+        <label for="large">500+</label>
+        <p>Website: <input type="text" name="website"></p>
+        <p>Breakdown of age groups</p>
+        <p>Percentage of 0-10 <input type="number" name="0-10"></p>
+        <p>Percentage of 10-20 <input type="number" name="10-20"></p>
+        <p>Percentage of 20-30 <input type="number" name="20-30"></p>
+        <p>Percentage of 30-50 <input type="number" name="30-50"></p>
+        <p>Percentage of 50+ <input type="number" name="50+"></p>
+        <p>Values and Beliefs</p><textarea name="values" cols="30" rows="10"></textarea>
+        <p>Any other important information that a prospective member might want to know!</p><textarea name="values" cols="30" rows="10"></textarea>
+    </form>
+</body>
+</html>
