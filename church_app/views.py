@@ -72,12 +72,36 @@ def church_login(request):
                 request.session['church_name']=f"{logged_church.church_name}"
                 request.session['admin_name']=f"{logged_church.admin_name}"
                 request.session['admin_email']=f"{logged_church.admin_email}"
-                return redirect('/church_info')
+                return redirect('/church_main')
     return redirect('/')
 
 def church_info(request):
-    context={
-        'church': Church.objects.get(id=request.session['church_id'])
-    }
-    return render(request, "church_info.html", context)
+    return render(request, "church_info.html")
 
+def church_contact(request):
+    return render(request, "church_contact.html")
+
+def church_beliefs(request):
+    return render(request, "church_beliefs.html")
+
+def church_pastor(request):
+    return render(request, "church_pastor.html")
+
+def church_info_other(request):
+    return render(request, "church_info_other.html")
+
+def church_success(request):
+    return render(request, "church_success.html")
+
+def church_main(request):
+    return render(request, "church_main.html")
+
+def church_profile(request):
+    return render(request, "church_profile.html")
+
+def church_logout(request):
+    request.session.clear()
+    return redirect('/church_reg_log')
+
+def test(request):
+    return render(request, "test.html")

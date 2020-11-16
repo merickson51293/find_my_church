@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+</head>
+<body>
+    <h2>Please tell us about {{request.session.church_name}}'s Denomination, Values/Beliefs and Breakdown of Members</h2>
+    <form action="/church_pastor" method="POST">
+        {% csrf_token %}
+        <p>Denomination: <input type="text" name="denomination"></p>
+        <p>Values and Beliefs</p><textarea name="values" cols="30" rows="10"></textarea>
+        <p>Size of Church: </p>
+        <input type="radio" name="size" value="small">
+        <label for="small">1-100</label><br>
+        <input type="radio" name="size" value="medium">
+        <label for="medium">101-500</label><br>
+        <input type="radio" name="size" value="large">
+        <label for="large">500+</label>
+        <p>Breakdown of age groups</p>
+        <p>Percentage of 0-10 <input type="number" name="0-10"></p>
+        <p>Percentage of 10-20 <input type="number" name="10-20"></p>
+        <p>Percentage of 20-30 <input type="number" name="20-30"></p>
+        <p>Percentage of 30-50 <input type="number" name="30-50"></p>
+        <p>Percentage of 50+ <input type="number" name="50+"></p>
+        <input type="submit" value="Next">
+    </form>
+    <a href="/church_contact"><button>Back</button></a>
+</body>
+</html>

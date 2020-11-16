@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+</head>
+<body>
+    <form action="/church_success" method="POST">
+        {% csrf_token %}
+        <p>Any other important information that a prospective member might want to know!</p><textarea name="values" cols="30" rows="10"></textarea>
+    </br>
+        <input type="submit" value="Finish">
+    </form>
+    <a href="/church_pastor"><button>Back</button></a>
+</body>
+</html>

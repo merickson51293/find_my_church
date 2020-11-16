@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+</head>
+<body>
+    <h2>Please tell us about your pastoral staff. Include as many pastors as you believe would be helpful to prospective members.</h2>
+    <form action="/church_info_other" method="POST">
+        {% csrf_token %}
+        <p>Pastor Name: <input type="text" name="pastor"></p>
+        <p>Pastor Title: <input type="text" name="pastor_title"></p>
+        <p>Pastor Contact Info: <input type="text" name="pastor_contact"></p>
+        <input type="submit" value="Next">
+    </form>
+    <a href="/church_beliefs"><button>Back</button></a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+</head>
+<body>
+    <h2>Please tell us about {{request.session.church_name}}'s Location and Contact Information</h2>
+    <form action="/church_beliefs" method="post">
+        {% csrf_token %}
+        <p>City and State: <input type="text" name="city_state"></p>
+        <p>Address: <input type="text" name="address"></p>
+        <p>Website: <input type="text" name="website"></p>
+        <p>Social Media</p>
+        <p>Facebook: <input type="text" name="facebook"></p>
+        <p>Instagram: <input type="text" name="instagram"></p>
+        <p>Twitter: <input type="text" name="twitter"></p>
+        <p>Email: <input type="email" name="church_email"></p>
+        <p>Phone Number: <input type="text" name="church_phone"></p>
+        <input type="submit" value="Next">
+    </form>
+    <a href="/church_info"><button>Back</button></a>
+</body>
+</html>

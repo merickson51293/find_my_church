@@ -52,12 +52,12 @@ class ChurchManager(models.Manager):
         return errors
     def church_login_validator(self, postdata):
         errors = {}
-        check = User.objects.filter(email=postdata['admin_email'])
+        check = Church.objects.filter(admin_email=postdata['admin_email'])
         if not check:
             errors['admin_email'] = "Admin email has not been registered."
         else:
             if not bcrypt.checkpw(postdata['password'].encode(), check[0].password.encode()):
-                errors['email'] = "Admin email and password do not match."
+                errors['admin_email'] = "Admin email and password do not match."
         return errors
 
 class Church(models.Model):
@@ -65,6 +65,10 @@ class Church(models.Model):
     admin_name=models.CharField(max_length=255)
     admin_email=models.CharField(max_length=255)
     password=models.CharField(max_length=255)
+    ##city_state=models.CharField(max_length=255)
+    ##address=models.CharField(max_length=255)
+    ##facebook=models.CharField(max_length=255)
+    ##instagram=models.CharField(max_length=255)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     objects=ChurchManager()
