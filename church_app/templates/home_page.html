@@ -11,7 +11,7 @@
 <div id="wrapper">
     <div id="top">
         <h1>Community Church Finder</h1>
-        <a href="/logout">Logout</a>
+        <a href="/church_profile/{{request.session.church_id}}">My Profile</a>  <a href="/logout">Logout</a>
         <h2>Find a church you can call home!</h2>
     </div>
     <p>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</p>
@@ -20,7 +20,7 @@
         {% for churches in all_churches %}
             <a href="/church_profile/{{churches.id}}"><h3>{{churches.church_name}}</h3></a>
             <p>City and State: {{churches.city_state}}</p>
-            <p>Website: {{churches.website}}</p>
+            <p>Website: <a href="https://www.{{churches.website}}">{{churches.website}}</a></p>
            <p>Denomination: {{churches.denomination}}</p>
            <p>Values and Beliefs: {{churches.values}}</p>
         {% endfor %}
@@ -35,7 +35,7 @@
         {% for messages in all_messages %}
         <div id="messages">
                 <h3>{{messages.message}}</h3>
-                <h5>- {{messages.church.church_name}}</h5>
+                <h5><a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
         </div>
         <a href="/delete/{{messages.id}}">Delete</a>
         {% endfor %}

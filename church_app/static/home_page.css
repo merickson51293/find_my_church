@@ -5,7 +5,7 @@ div#wrapper{
 h1{
     display: inline-block;
     width: 50%;
-    margin-right: 45%;
+    margin-right: 41%;
 }
 
 h2{
@@ -17,7 +17,6 @@ h2{
 a{
     display: inline-block;
     vertical-align: top;
-    padding-top: 20px;
 }
 
 div#top_left{

@@ -116,16 +116,19 @@ def church_info_other(request):
 
 def create_church_info_other(request):
     new_church=Church.objects.create(church_name=request.session['church_name'], admin_name=request.session['admin_name'], admin_email=request.session['admin_email'], password=request.session['password'], city_state=request.session['city_state'], address=request.session['address'],website=request.session['website'],facebook=request.session['facebook'], instagram=request.session['instagram'], twitter=request.session['twitter'], church_email=request.session['church_email'], church_phone=request.session['church_phone'], denomination=request.session['denomination'], values=request.session['values'], size=request.session['size'], youngest=request.session['youngest'], younger=request.session['younger'], young=request.session['young'], old=request.session['old'], oldest=request.session['oldest'], other=request.POST['other'])
+    request.session['church_id']=new_church.id
     return redirect('/church_pastor')
 
 def create_pastor(request):
     if request.method=='POST':
         new_pastor= Pastor.objects.create(pastor_name=request.POST['pastor_name'], pastor_title=request.POST['pastor_title'], pastor_email=request.POST['pastor_email'], pastor_phone=request.POST['pastor_phone'], pastor_social=request.POST['pastor_social'])
+        new_pastor.church.add(Church.objects.get(id=request.session['church_id']))
         return redirect('/church_pastor')
 
 def church_pastor(request):
+    church=Church.objects.get(id=request.session['church_id'])
     context={
-        'all_pastors': Pastor.objects.all()
+        'church_pastors': church.church_pastor.all()
     }
     return render(request, "church_pastor.html", context)
 
@@ -166,3 +169,30 @@ def home_page(request):
     }
     return render(request, "home_page.html", context)
 
+def edit_church(request, church_id):
+    context={
+        'one_church': Church.objects.get(id=church_id)
+    }
+    return render(request, "edit_church.html", context)
+
+def edit(request, church_id):
+    edit = Church.objects.get(id=church_id)
+    edit.address= request.POST['address']
+    edit.city_state= request.POST['city_state']
+    edit.website= request.POST['website']
+    edit.facebook= request.POST['facebook']
+    edit.instagram= request.POST['instagram']
+    edit.twitter= request.POST['twitter']
+    edit.church_email= request.POST['church_email']
+    edit.church_phone= request.POST['church_phone']
+    edit.denomination= request.POST['denomination']
+    edit.values= request.POST['values']
+    edit.size= request.POST['size']
+    edit.youngest= request.POST['youngest']
+    edit.younger=request.POST['younger']
+    edit.young= request.POST['young']
+    edit.old= request.POST['old']
+    edit.oldest= request.POST['oldest']
+    edit.other= request.POST['other']
+    edit.save()
+    return redirect(f'/church_profile/{church_id}')

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Church</title>
+    {% load static %}
+</head>
+<body>
+    <h1>Edit {{request.session.church_name}}'s page</h1>
+    <form action="/edit/{{request.session.church_id}}" method="post">
+        {% csrf_token %}
+    Address: <input type="text" name="address" value="{{request.session.address}}"></br>
+    City and State: <input type="text" name="city_state" value="{{request.session.city_state}}"></br>
+    Website: <input type="text" name="website" value="{{request.session.website}}"></br>
+    Facebook: <input type="text" name="facebook" value="{{request.session.facebook}}"></br>
+    Instagram: <input type="text" name="instagram" value="{{request.session.instagram}}"></br>
+    Twitter: <input type="text" name="twitter" value="{{request.session.twitter}}"></br>
+    Church Email: <input type="text" name="church_email" value="{{request.session.church_email}}"></br>
+    Church Phone Number: <input type="text" name="church_phone" value="{{request.session.church_phone}}"></br>
+    Denomination: <input type="text" name="denomination" value="{{request.session.denomination}}"></br>
+    Values and Beliefs: <input type="text" name="values" value="{{request.session.values}}"></br>
+    Size: <input type="text" name="size" value="{{request.session.size}}"></br>
+    Percentage of 0-10 year olds: <input type="text" name="youngest" value="{{request.session.youngest}}"></br>
+    Percentage of 10-20 year olds: <input type="text" name="younger" value="{{request.session.younger}}"></br>
+    Percentage of 20-30 year olds: <input type="text" name="young" value="{{request.session.young}}"></br>
+    Percentage of 30-50 year olds: <input type="text" name="old"value="{{request.session.old}}"></br>
+    Percentage of 50+ year olds: <input type="text" name="oldest" value="{{request.session.oldest}}"></br>
+    Other: <input type="text" name="other" value="{{request.session.other}}"></br>
+    <input type="submit" value="Edit">
+    </form>
+</body>
+</html>

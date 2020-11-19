@@ -101,3 +101,9 @@ class Message(models.Model):
     church= models.ForeignKey(Church, related_name='church_message', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+
+class DirectMessages(models.Model):
+    church=models.ForeignKey(Church, related_name='user_dm', on_delete=models.CASCADE)
+    user=models.ForeignKey(User, related_name='church_dm', on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)

@@ -9,13 +9,15 @@
 <body>
     <div id="top">
         <h1>{{one_church.church_name}}'s Profile Page</h1>
+        <a href="/home_page">Home Page</a>
+        <a href="/church_main">Church Home Page</a>
         <a href="/logout">Logout</a>
     </div>  
     <p>Street Address: {{one_church.address}}</p>
     <p>City and State: {{one_church.city_state}}</p>
     <p>Website: {{one_church.website}}</p>
     <h3>Social Media</h3>
-    <p>Facebook: <a href="/{{one_church.facebook}}">{{one_church.facebook}}</a></p>
+    <p>Facebook: <a href="https://www.{{one_church.facebook}}">{{one_church.facebook}}</a></p>
     <p>Instagram: {{one_church.instagram}}</p>
     <p>Twitter: {{one_church.twitter}}</p>
     <p>Church Email: {{one_church.church_email}}</p>
@@ -29,6 +31,12 @@
     <p>Percentage of 30-50 year olds: {{one_church.old}}%</p>
     <p>Percentage of 50+ year olds: {{one_church.oldest}}%</p>
     <p>Other Info: {{one_church.other}}</p>
-    <a href="/church_main"><button>Church Home Page</button></a>
+    <p>Pastors</p>
+    {% for pastor in one_church.church_pastor.all %}
+    <p>Senior Pastor {{pastor.pastor_name}}</p>
+    {% endfor %}
+        {% if one_church.id == request.session.church_id %}
+        <a href="/edit_church/{{one_church.id}}">Edit Church</a>
+        {% endif %}
 </body>
 </html>
