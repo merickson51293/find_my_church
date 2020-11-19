@@ -132,8 +132,11 @@ def church_pastor(request):
 def church_main(request):
     return render(request, "church_main.html")
 
-def church_profile(request):
-    return render(request, "church_profile.html")
+def church_profile(request, church_id):
+    context={
+        'one_church': Church.objects.get(id=church_id)
+    }
+    return render(request, "church_profile.html", context)
 
 def logout(request):
     request.session.clear()

@@ -20,7 +20,7 @@ urlpatterns = [
     path('church_info_other', views.church_info_other),
     path('church_success', views.church_success),
     path('church_main', views.church_main),
-    path('church_profile', views. church_profile),
+    path('church_profile/<int:church_id>', views. church_profile),
     path('add_message', views.add_message),
     path('delete/<int:message_id>', views.delete),
     path('delete_church/<int:church_id>', views.delete_church),
