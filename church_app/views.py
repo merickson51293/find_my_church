@@ -130,7 +130,10 @@ def church_pastor(request):
     return render(request, "church_pastor.html", context)
 
 def church_main(request):
-    return render(request, "church_main.html")
+    context={
+       'all_churches': Church.objects.all() 
+    }
+    return render(request, "church_main.html", context)
 
 def church_profile(request, church_id):
     context={

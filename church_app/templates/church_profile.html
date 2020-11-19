@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="top">
-        <h1>{{request.session.church_name}}'s Profile Page</h1>
+        <h1>{{one_church.church_name}}'s Profile Page</h1>
         <a href="/logout">Logout</a>
     </div>  
     <p>Street Address: {{one_church.address}}</p>
@@ -23,12 +23,12 @@
     <p>Denomination: {{one_church.denomination}}</p>
     <p>Values and Beliefs: {{one_church.values}}</p>
     <p>Church Size: {{one_church.size}}</p>
-    <p>Percentage of 0-10 year olds: {{one_church.youngest}}</p>
-    <p>Percentage of 10-20 year olds:{{one_church.younger}}</p>
-    <p>Percentage of 20-30 year olds:{{one_church.young}}</p>
-    <p>Percentage of 30-50 year olds:{{one_church.old}}</p>
-    <p>Percentage of 50+ year olds:{{one_church.oldest}}</p>
-    <p>{{one_church.other}}</p>
+    <p>Percentage of 0-10 year olds: {{one_church.youngest}}%</p>
+    <p>Percentage of 10-20 year olds: {{one_church.younger}}%</p>
+    <p>Percentage of 20-30 year olds: {{one_church.young}}%</p>
+    <p>Percentage of 30-50 year olds: {{one_church.old}}%</p>
+    <p>Percentage of 50+ year olds: {{one_church.oldest}}%</p>
+    <p>Other Info: {{one_church.other}}</p>
     <a href="/church_main"><button>Church Home Page</button></a>
 </body>
 </html>

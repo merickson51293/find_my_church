@@ -18,13 +18,11 @@
     <div id="top_left">
         <h3>Possible Churches in your area</h3>
         {% for churches in all_churches %}
-        <ul>
-            <li>{{churches.church_name}}</li>
-            <li>{{churches.address}}</li>
-            <li>{{churches.website}}</li>
-            <li>{{churches.size}}</li>
-            <li>{{churches.values}}</li>
-        </ul>
+            <a href="/church_profile/{{churches.id}}"><h3>{{churches.church_name}}</h3></a>
+            <p>City and State: {{churches.city_state}}</p>
+            <p>Website: {{churches.website}}</p>
+           <p>Denomination: {{churches.denomination}}</p>
+           <p>Values and Beliefs: {{churches.values}}</p>
         {% endfor %}
     </div>
     <div id="top_right">
