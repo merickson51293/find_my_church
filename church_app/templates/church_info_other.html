@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="{% static 'church_info.css' %}">
 </head>
 <body>
-    <form action="/church_success" method="POST">
+    <form action="/create_church_info_other" method="POST">
         {% csrf_token %}
-        <p>Any other important information that a prospective member might want to know!</p><textarea name="values" cols="30" rows="10"></textarea>
+        <p>Any other important information that a prospective member might want to know!</p><textarea name="other" cols="30" rows="10"></textarea>
     </br>
         <input type="submit" value="Finish">
     </form>
-    <a href="/church_pastor"><button>Back</button></a>
+    <a href="/church_beliefs"><button>Back</button></a>
 </body>
 </html>

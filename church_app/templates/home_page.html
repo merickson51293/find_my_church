@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_page.css' %}">
+</head>
+<body>
+<div id="wrapper">
+    <div id="top">
+        <h1>Community Church Finder</h1>
+        <a href="/logout">Logout</a>
+        <h2>Find a church you can call home!</h2>
+    </div>
+    <p>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</p>
+    <div id="top_left">
+        <h3>Possible Churches in your area</h3>
+        {% for churches in all_churches %}
+        <ul>
+            <li>{{churches.church_name}}</li>
+            <li>{{churches.address}}</li>
+            <li>{{churches.website}}</li>
+            <li>{{churches.size}}</li>
+            <li>{{churches.values}}</li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div id="top_right">
+        <h3>The Wall</h3>
+        <form action="/add_message" method="post">
+            {% csrf_token %}
+        <p id="add_message">Message: <textarea type="text" name="message"></textarea></p></br>
+        <input type="submit" value="Add Message">
+        </form>
+        {% for messages in all_messages %}
+        <div id="messages">
+                <h3>{{messages.message}}</h3>
+                <h5>- {{messages.church.church_name}}</h5>
+        </div>
+        <a href="/delete/{{messages.id}}">Delete</a>
+        {% endfor %}
+        <!--add messages from followed churches and friends-->
+        <!--liking capabilities and commenting capabilities-->
+        <!--direct messaging capabilities to each person-->
+        <!--person/church name is clickable to their specific profile-->
+    </div>
+</div>
+</body>
+</html>

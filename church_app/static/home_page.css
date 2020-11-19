@@ -1,0 +1,31 @@
+div#wrapper{
+    margin: 5px;
+}
+
+h1{
+    display: inline-block;
+    width: 50%;
+    margin-right: 45%;
+}
+
+h2{
+    display: inline-block;
+    width: 50%;
+
+}
+
+a{
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+div#top_left{
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+}
+
+div#top_right{
+    display: inline-block;
+}

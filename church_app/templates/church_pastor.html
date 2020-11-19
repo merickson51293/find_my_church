@@ -5,16 +5,25 @@
     <title>Church Info Input</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'church_info.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 </head>
 <body>
     <h2>Please tell us about your pastoral staff. Include as many pastors as you believe would be helpful to prospective members.</h2>
-    <form action="/church_info_other" method="POST">
+    <form action="/create_pastor" method="POST">
         {% csrf_token %}
-        <p>Pastor Name: <input type="text" name="pastor"></p>
-        <p>Pastor Title: <input type="text" name="pastor_title"></p>
-        <p>Pastor Contact Info: <input type="text" name="pastor_contact"></p>
-        <input type="submit" value="Next">
+        <p><b>Pastor Name: </b><input type="text" name="pastor_name"></p>
+        <p><b>Pastor Title: </b><input type="text" name="pastor_title"></p>
+        <p><b>Pastor Email: </b><input type="text" name="pastor_email"></p>
+        <p><b>Pastor Phone Number: </b><input type="text" name="pastor_phone"></p>
+        <p><b>Pastor Social Media: </b><input type="text" name="pastor_social"></p>
+        <input type="submit" value="Add Pastor">
     </form>
+    {% for pastor in all_pastors %}
+    <p>{{pastor.pastor_name}}</p>
+    <p>{{pastor.pastor_title}}</p>
+    {% endfor %}
+    <a href="/home_page">Home Page</a>
     <a href="/church_beliefs"><button>Back</button></a>
 </body>
 </html>

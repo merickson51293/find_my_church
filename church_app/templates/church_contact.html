@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>Please tell us about {{request.session.church_name}}'s Location and Contact Information</h2>
-    <form action="/church_beliefs" method="post">
+    <form action="/create_church_contact" method="post">
         {% csrf_token %}
         <p>City and State: <input type="text" name="city_state"></p>
         <p>Address: <input type="text" name="address"></p>
