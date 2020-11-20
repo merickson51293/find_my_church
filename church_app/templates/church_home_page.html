@@ -12,7 +12,7 @@
     <div id="top">
         <h1>Community Church Finder</h1>
         <a href="/church_profile/{{request.session.church_id}}">My Profile</a>  <a href="/logout">Logout</a>
-        <h2>Find a church you can call home!</h2>
+        <h2>Find a church you can call home! CHURCH HOME PAGE</h2>
     </div>
     <p>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</p>
     <div id="top_left">
@@ -36,6 +36,7 @@
         <div id="messages">
                 <h3>{{messages.message}}</h3>
                 <h5>- <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
+                <h5>{{messages.church.created_at}}</h5>
         </div>
         <div id="comment">
             {% for comment in messages.church_post_comments.all %}

@@ -37,7 +37,7 @@ def login(request):
             if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
                 request.session['user_id']=logged_user.id
                 request.session['user_name']=f"{logged_user.first_name} {logged_user.last_name}"
-                return redirect('/main')
+                return redirect('/user_home_page')
     return redirect('/')
 
 def church_success(request):
@@ -150,7 +150,7 @@ def logout(request):
 
 def church_add_message(request):
     message = Message.objects.create(message=request.POST['message'], church=Church.objects.get(id=request.session['church_id']))
-    return redirect('/home_page')
+    return redirect('/church_home_page')
 
 def delete(request, message_id):
     message=Message.objects.get(id=message_id)
