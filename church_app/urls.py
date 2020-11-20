@@ -23,8 +23,11 @@ urlpatterns = [
     path('church_profile/<int:church_id>', views. church_profile),
     path('edit_church/<int:church_id>', views.edit_church),
     path('edit/<int:church_id>', views.edit),
-    path('add_message', views.add_message),
+    path('church_add_message', views.church_add_message),
+    path('church_add_comment/<int:message_id>', views.church_add_comment),
+    path('user_add_comment/<int:message_id>', views.user_add_comment),
     path('delete/<int:message_id>', views.delete),
     path('delete_church/<int:church_id>', views.delete_church),
-    path('home_page', views.home_page),
+    path('church_home_page', views.church_home_page),
+    path('user_home_page', views.user_home_page),
 ]

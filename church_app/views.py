@@ -4,10 +4,10 @@ import bcrypt
 from .models import *
 
 def index(request):
-    return render(request, "index.html")
+    return render(request, "user_reg/index.html")
 
 def church_reg_log(request):
-    return render(request, "church_reg_log.html")
+    return render(request, "church_reg/church_reg_log.html")
 
 def create_user(request):
     if request.method=="POST":
@@ -21,7 +21,7 @@ def create_user(request):
         new_user=User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password=hash_pw)
         request.session['user_id']=new_user.id
         request.session['user_name']=f"{new_user.first_name} {new_user.last_name}"
-        return redirect("/main")
+        return redirect("/user_home_page")
     return redirect('/')
 
 def login(request):
@@ -42,7 +42,7 @@ def login(request):
 
 def church_success(request):
     
-    return render(request, "church_success.html")
+    return render(request, "church/church_success.html")
 
 def create_church(request):
     if request.method=="POST":
@@ -79,10 +79,10 @@ def church_login(request):
     return redirect('/')
 
 def church_info(request):
-    return render(request, "church_info.html")
+    return render(request, "church_reg/church_info.html")
 
 def church_contact(request):
-    return render(request, "church_contact.html")
+    return render(request, "church_reg/church_contact.html")
 
 def create_church_contact(request):
     if request.method=="POST":
@@ -97,7 +97,7 @@ def create_church_contact(request):
         return redirect('/church_beliefs')
 
 def church_beliefs(request):
-    return render(request, "church_beliefs.html")
+    return render(request, "church_reg/church_beliefs.html")
 
 def create_church_beliefs(request):
     if request.method=="POST":
@@ -112,7 +112,7 @@ def create_church_beliefs(request):
         return redirect('/church_info_other')
 
 def church_info_other(request):
-    return render(request, "church_info_other.html")
+    return render(request, "church_reg/church_info_other.html")
 
 def create_church_info_other(request):
     new_church=Church.objects.create(church_name=request.session['church_name'], admin_name=request.session['admin_name'], admin_email=request.session['admin_email'], password=request.session['password'], city_state=request.session['city_state'], address=request.session['address'],website=request.session['website'],facebook=request.session['facebook'], instagram=request.session['instagram'], twitter=request.session['twitter'], church_email=request.session['church_email'], church_phone=request.session['church_phone'], denomination=request.session['denomination'], values=request.session['values'], size=request.session['size'], youngest=request.session['youngest'], younger=request.session['younger'], young=request.session['young'], old=request.session['old'], oldest=request.session['oldest'], other=request.POST['other'])
@@ -130,25 +130,25 @@ def church_pastor(request):
     context={
         'church_pastors': church.church_pastor.all()
     }
-    return render(request, "church_pastor.html", context)
+    return render(request, "church_reg/church_pastor.html", context)
 
 def church_main(request):
     context={
        'all_churches': Church.objects.all() 
     }
-    return render(request, "church_main.html", context)
+    return render(request, "church/church_main.html", context)
 
 def church_profile(request, church_id):
     context={
         'one_church': Church.objects.get(id=church_id)
     }
-    return render(request, "church_profile.html", context)
+    return render(request, "church/church_profile.html", context)
 
 def logout(request):
     request.session.clear()
     return redirect('/church_reg_log')
 
-def add_message(request):
+def church_add_message(request):
     message = Message.objects.create(message=request.POST['message'], church=Church.objects.get(id=request.session['church_id']))
     return redirect('/home_page')
 
@@ -162,18 +162,25 @@ def delete_church(request, church_id):
     church.delete()
     return redirect('/home_page')
 
-def home_page(request):
+def church_home_page(request):
     context={
         'all_churches': Church.objects.all(),
         'all_messages': Message.objects.all(),
     }
-    return render(request, "home_page.html", context)
+    return render(request, "church_home_page.html", context)
+
+def user_home_page(request):
+    context={
+        'all_churches': Church.objects.all(),
+        'all_messages': Message.objects.all(),
+    }
+    return render(request, "user_home_page.html", context)
 
 def edit_church(request, church_id):
     context={
         'one_church': Church.objects.get(id=church_id)
     }
-    return render(request, "edit_church.html", context)
+    return render(request, "church/edit_church.html", context)
 
 def edit(request, church_id):
     edit = Church.objects.get(id=church_id)
@@ -196,3 +203,15 @@ def edit(request, church_id):
     edit.other= request.POST['other']
     edit.save()
     return redirect(f'/church_profile/{church_id}')
+
+def church_add_comment(request, message_id):
+    church = Church.objects.get(id=request.session['church_id'])
+    message = Message.objects.get(id=message_id)
+    comment = ChurchComments.objects.create(comment=request.POST['comment'], church=church, wall_message=message)
+    return redirect('/church_home_page')
+
+def user_add_comment(request, message_id):
+    user = User.objects.get(id=request.session['user_id'])
+    message = Message.objects.get(id=message_id)
+    comment = UserComments.objects.create(comment=request.POST['comment'], user=user, wall_message=message)
+    return redirect('/user_home_page')

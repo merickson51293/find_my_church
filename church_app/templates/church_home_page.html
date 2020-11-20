@@ -27,7 +27,7 @@
     </div>
     <div id="top_right">
         <h3>The Wall</h3>
-        <form action="/add_message" method="post">
+        <form action="/church_add_message" method="post">
             {% csrf_token %}
         <p id="add_message">Message: <textarea type="text" name="message"></textarea></p></br>
         <input type="submit" value="Add Message">
@@ -35,9 +35,27 @@
         {% for messages in all_messages %}
         <div id="messages">
                 <h3>{{messages.message}}</h3>
-                <h5><a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
+                <h5>- <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
         </div>
+        <div id="comment">
+            {% for comment in messages.church_post_comments.all %}
+            <p>{{comment.comment}}</p>
+            <p>Commented by: {{comment.church.church_name}}</p>
+            {% endfor %}
+            {% for comment in messages.user_post_comments.all %}
+            <p>{{comment.comment}}</p>
+            <p>Commented by: {{comment.user.first_name}} {{comment.user.last_name}}</p>
+            {% endfor %}
+            <form action="/church_add_comment/{{messages.id}}" method="post">
+                {% csrf_token %}
+            <p>Comment: <input type="text" name="comment"></p>
+            <input type="submit" value="Comment">
+            </form>
+            
+        </div>
+        {% if messages.church.id == request.session.church_id %}
         <a href="/delete/{{messages.id}}">Delete</a>
+        {% endif %}
         {% endfor %}
         <!--add messages from followed churches and friends-->
         <!--liking capabilities and commenting capabilities-->

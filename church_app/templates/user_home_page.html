@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_page.css' %}">
+</head>
+<body>
+<div id="wrapper">
+    <div id="top">
+        <h1>Community Church Finder</h1>
+        <a href="/church_profile/{{request.session.church_id}}">My Profile</a>  <a href="/logout">Logout</a>
+        <h2>Find a church you can call home! USER HOME PAGE</h2>
+    </div>
+    <p>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</p>
+    <div id="top_left">
+        <h3>Possible Churches in your area</h3>
+        {% for churches in all_churches %}
+            <a href="/church_profile/{{churches.id}}"><h3>{{churches.church_name}}</h3></a>
+            <p>City and State: {{churches.city_state}}</p>
+            <p>Website: <a href="https://www.{{churches.website}}">{{churches.website}}</a></p>
+           <p>Denomination: {{churches.denomination}}</p>
+           <p>Values and Beliefs: {{churches.values}}</p>
+        {% endfor %}
+    </div>
+    <div id="top_right">
+        <h3>The Wall</h3>
+        <form action="/user_add_message" method="post">
+            {% csrf_token %}
+        <p id="add_message">Message: <textarea type="text" name="message"></textarea></p></br>
+        <input type="submit" value="Add Message">
+        </form>
+        {% for messages in all_messages %}
+        <div id="messages">
+                <h3>{{messages.message}}</h3>
+                <h5>- <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
+        </div>
+        <div id="comment">
+            {% for comment in messages.church_post_comments.all %}
+            <p>{{comment.comment}}</p>
+            <p>Commented by: {{comment.church.church_name}}{{comment.user.first_name}}</p>
+            {% endfor %}
+            {% for comment in messages.user_post_comments.all %}
+            <p>{{comment.comment}}</p>
+            <p>Commented by: {{comment.user.first_name}} {{comment.user.last_name}}</p>
+            {% endfor %}
+            <form action="/user_add_comment/{{messages.id}}" method="post">
+                {% csrf_token %}
+            <p>Comment: <input type="text" name="comment"></p>
+            <input type="submit" value="Comment">
+            </form>
+            
+        </div>
+        {% if messages.church.id == request.session.church_id %}
+        <a href="/delete/{{messages.id}}">Delete</a>
+        {% endif %}
+        {% endfor %}
+        <!--add messages from followed churches and friends-->
+        <!--liking capabilities and commenting capabilities-->
+        <!--direct messaging capabilities to each person-->
+        <!--person/church name is clickable to their specific profile-->
+    </div>
+</div>
+</body>
+</html>

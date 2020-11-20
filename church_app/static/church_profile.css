@@ -1,0 +1,8 @@
+div#top > h1{
+    display: inline-block;
+    margin-right: 50%
+}
+
+div#top > a{
+    display: inline-block;
+}

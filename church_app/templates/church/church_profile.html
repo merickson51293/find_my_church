@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Profile</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'church_profile.css' %}">
 </head>
 <body>
     <div id="top">
         <h1>{{one_church.church_name}}'s Profile Page</h1>
-        <a href="/home_page">Home Page</a>
-        <a href="/church_main">Church Home Page</a>
-        <a href="/logout">Logout</a>
+        <a href="/church_main"><button>Church Home Page</button></a>
+        <a href="/home_page"><button>Home Page</button></a>
+        <a href="/logout"><button>Logout</button></a>
     </div>  
     <p>Street Address: {{one_church.address}}</p>
     <p>City and State: {{one_church.city_state}}</p>
@@ -36,7 +37,7 @@
     <p>Senior Pastor {{pastor.pastor_name}}</p>
     {% endfor %}
         {% if one_church.id == request.session.church_id %}
-        <a href="/edit_church/{{one_church.id}}">Edit Church</a>
+        <a href="/edit_church/{{one_church.id}}">Edit Your Church</a>
         {% endif %}
 </body>
 </html>

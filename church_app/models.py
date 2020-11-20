@@ -107,3 +107,17 @@ class DirectMessages(models.Model):
     user=models.ForeignKey(User, related_name='church_dm', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+
+class ChurchComments(models.Model):
+    comment=models.CharField(max_length=255)
+    church= models.ForeignKey(Church, related_name='church_comment', on_delete=models.CASCADE)
+    wall_message= models.ForeignKey(Message, related_name='church_post_comments', on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
+class UserComments(models.Model):
+    comment=models.CharField(max_length=255)
+    user= models.ForeignKey(User, related_name='user_comment', on_delete=models.CASCADE)
+    wall_message= models.ForeignKey(Message, related_name='user_post_comments', on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
