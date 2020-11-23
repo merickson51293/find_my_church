@@ -11,9 +11,9 @@
         {% csrf_token %}
         <p>Name: {{request.session.first_name}} {{request.session.last_name}}</p>
         <p>Birthday <input type="date" name="age"></p>
-        <p>Address: <input type="text" name="address"></p>
-        <p>City and State: <input type="text" name="city_state"></p>
-        <p>Email: <input type="text" name="user_website"></p>
+        <p>Address: <input type="text" name="user_address"></p>
+        <p>City and State: <input type="text" name="user_city_state"></p>
+        <p>Email: <input type="text" name="user_email"></p>
         <p>Social Media</p>
         <p>Facebook: <input type="text" name="user_facebook"></p>
         <p>Instagram: <input type="text" name="user_instagram"></p>

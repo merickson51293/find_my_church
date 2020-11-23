@@ -87,20 +87,35 @@ def user_contact(request):
     return render(request, "user_reg/user_contact.html")
 
 def create_user_contact(request):
-    return render(request, "user_reg/user_church.html")
-    # if request.method=="POST":
-    #     request.session['city_state']=f"{request.POST['city_state']}"
-    #     request.session['address']=f"{request.POST['address']}"
-    #     request.session['user_email']=f"{request.POST['user_email']}"
-    #     request.session['user_facebook']=f"{request.POST['user_facebook']}"
-    #     request.session['user_instagram']=f"{request.POST['user_instagram']}"
-    #     request.session['user_twitter']=f"{request.POST['user_twitter']}"
-    #     request.session['family']=f"{request.POST['family']}"
-    #     request.session['user_phone']=f"{request.POST['user_phone']}"
-    #     return redirect('/church_beliefs')
+    if request.method=="POST":
+        request.session['user_city_state']=f"{request.POST['user_city_state']}"
+        request.session['user_address']=f"{request.POST['user_address']}"
+        request.session['user_email']=f"{request.POST['user_email']}"
+        request.session['user_facebook']=f"{request.POST['user_facebook']}"
+        request.session['user_instagram']=f"{request.POST['user_instagram']}"
+        request.session['user_twitter']=f"{request.POST['user_twitter']}"
+        request.session['family']=f"{request.POST['family']}"
+        request.session['user_phone']=f"{request.POST['user_phone']}"
+        return redirect('/user_church')
 
 def user_church(request):
     return render(request, "user_reg/user_church.html")
+
+def create_user_church(request):
+    if request.method=="POST":
+        request.session['denomination']=f"{request.POST['denomination']}"
+        request.session['church_size']=f"{request.POST['church_size']}"
+        request.session['student_programs']=f"{request.POST['student_programs']}"
+        request.session['small_groups']=f"{request.POST['small_groups']}"
+        return redirect('/user_info_other')
+
+def user_info_other(request):
+    return render(request, "user_reg/user_info_other.html")
+
+def finish_user(request):
+    new_user=User.objects.create(first_name=request.session['first_name'], last_name=request.session['last_name'], email=request.session['user_email'], password=request.session['password'], user_address=request.session['user_address'],user_city_state=request.session['user_city_state'], user_email=request.session['user_email'], user_facebook=request.session['user_facebook'], user_instagram=request.session['user_instagram'], user_twitter=request.session['user_twitter'], family=request.session['family'], user_phone=request.session['user_phone'], denomination=request.session['denomination'], church_size=request.session['church_size'], student_programs=request.session['student_programs'], small_groups=request.session['small_groups'], user_info_other=request.POST['user_info_other'])
+    request.session['user_id']=new_user.id
+    return redirect("/user_home_page")
 
 def church_info(request):
     return render(request, "church_reg/church_info.html")

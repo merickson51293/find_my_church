@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_info.css' %}">
+</head>
+<body>
+    <form action="/finish_user" method="POST">
+        {% csrf_token %}
+        <p>Any other important information that we should know that will help us find you a church to call home!</p><textarea name="user_info_other" cols="30" rows="10"></textarea>
+    </br>
+        <input type="submit" value="Finish">
+    </form>
+    <a href="/user_church"><button>Back</button></a>
+</body>
+</html>
