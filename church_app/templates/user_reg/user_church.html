@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Church Preferences</title>
+</head>
+<body>
+    <h2>Please tell us what you are looking for in a church.</h2>
+    <form action="/create_user_church" method="post">
+        {% csrf_token %}
+        <p>Prefered Church Denomination: (You may choose more than one)</p>
+        Catholic<input type="checkbox" name="catholic" value="Catholic">
+        Non-Denominational<input type="checkbox" name="non-denominational" value="Non-Denominational">
+        Baptist<input type="checkbox" name="baptist" value="Baptist">
+        Lutheran<input type="checkbox" name="lutheran" value="Lutheran">
+        Reformed<input type="checkbox" name="reformed" value="Reformed">
+        Methodist<input type="checkbox" name="methodist" value="Methodist">
+        Pentecostal<input type="checkbox" name="pentecsotal" value="Pentecostal">
+        Other<input type="checkbox" name="other" value="Other">
+        No Preference <input type="checkbox" name="no_preference"value="No Preference">
+        <p>Church Size: </p>
+        0-100<input type="radio" name="church_size" value="0-100">
+        100-500<input type="radio" name="church_size" value="100-500">
+        500+<input type="radio" name="church_size" value="500+">
+        <p>Importance of programs for students: <input type="range" name="student_programs"></p>
+        <p>Importance of small groups: <input type="range" name="small_groups"></p>
+        <p>Social Media</p>
+        <p>Facebook: <input type="url" name="user_facebook"></p>
+        <p>Instagram: <input type="text" name="user_instagram"></p>
+        <p>Twitter: <input type="text" name="user_twitter"></p>
+        <p>Family Members (Name and age): <textarea name="family" cols="30" rows="10" placeholder="EX. Husband - John Doe - 25 Years Old"></textarea></p>
+        <p>Phone Number: <input type="tel" name="user_phone" placeholder="(000)000-0000"></p>
+        <input type="submit" value="Next">
+    </form>
+    <a href="/user_contact"><button>Back</button></a>
+</body>
+</html>

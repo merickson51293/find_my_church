@@ -18,10 +18,13 @@ def create_user(request):
             return redirect('/')
         user_pw=request.POST['password']
         hash_pw=bcrypt.hashpw(user_pw.encode(), bcrypt.gensalt()).decode()
-        new_user=User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password=hash_pw)
-        request.session['user_id']=new_user.id
-        request.session['user_name']=f"{new_user.first_name} {new_user.last_name}"
-        return redirect("/user_home_page")
+        # new_user=User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password=hash_pw)
+        # request.session['user_id']=new_user.id
+        request.session['first_name']=request.POST['first_name']
+        request.session['last_name']=request.POST['last_name']
+        request.session['email']=request.POST['email']
+        request.session['password']=hash_pw
+        return redirect("/user_info")
     return redirect('/')
 
 def login(request):
@@ -41,7 +44,6 @@ def login(request):
     return redirect('/')
 
 def church_success(request):
-    
     return render(request, "church/church_success.html")
 
 def create_church(request):
@@ -75,8 +77,30 @@ def church_login(request):
                 request.session['church_name']=f"{logged_church.church_name}"
                 request.session['admin_name']=f"{logged_church.admin_name}"
                 request.session['admin_email']=f"{logged_church.admin_email}"
-                return redirect('/church_main')
+                return redirect('/church_home_page')
     return redirect('/')
+
+def user_info(request):
+    return render(request, "user_reg/user_info.html")
+
+def user_contact(request):
+    return render(request, "user_reg/user_contact.html")
+
+def create_user_contact(request):
+    return render(request, "user_reg/user_church.html")
+    # if request.method=="POST":
+    #     request.session['city_state']=f"{request.POST['city_state']}"
+    #     request.session['address']=f"{request.POST['address']}"
+    #     request.session['user_email']=f"{request.POST['user_email']}"
+    #     request.session['user_facebook']=f"{request.POST['user_facebook']}"
+    #     request.session['user_instagram']=f"{request.POST['user_instagram']}"
+    #     request.session['user_twitter']=f"{request.POST['user_twitter']}"
+    #     request.session['family']=f"{request.POST['family']}"
+    #     request.session['user_phone']=f"{request.POST['user_phone']}"
+    #     return redirect('/church_beliefs')
+
+def user_church(request):
+    return render(request, "user_reg/user_church.html")
 
 def church_info(request):
     return render(request, "church_reg/church_info.html")

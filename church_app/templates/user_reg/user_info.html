@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Info Input</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+</head>
+<body>
+    <h1>Thank you {{request.session.first_name}} {{request.session.last_name}} for registering at CommunityChurchFinder.com</h1>
+    <h2>On the next couple of pages, please tell us about yourself. This will help us find you a new church to call home.</h2>
+    <a href="/user_contact"><input type="button" value="Next"></a>
+</body>
+</html>
