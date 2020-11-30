@@ -8,21 +8,26 @@ h1{
     margin-right: 41%;
 }
 
+div#top{
+    
+}
+
 h2{
     display: inline-block;
     width: 50%;
-
 }
 
-a{
+div#top > a{
     display: inline-block;
     vertical-align: top;
+    margin-top: 5px;
 }
 
 div#top_left{
     display: inline-block;
     width: 50%;
     vertical-align: top;
+    border: 2px solid black;
 }
 
 div#top_right{

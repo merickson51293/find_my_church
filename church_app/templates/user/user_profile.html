@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'church_profile.css' %}">
+</head>
+<body>
+    <div id="top">
+        <h1>{{one_user.first_name}} {{one_user.last_name}}'s Profile Page</h1>
+        <a href="/user_home_page"><button>Home Page</button></a>
+        <a href="/logout"><button>Logout</button></a>
+    </div>  
+    <p>Street Address: {{one_user.address}}</p>
+    <p>City and State: {{one_user.user_city_state}}</p>
+    <p>Website: {{one_user.user_email}}</p>
+    <h3>Social Media</h3>
+    <p>Facebook: <a href="https://www.{{one_user.facebook}}">{{one_user.user_facebook}}</a></p>
+    <p>Instagram: {{one_user.user_instagram}}</p>
+    <p>Twitter: {{one_user.user_twitter}}</p>
+    <p>Phone Number: {{one_user.user_phone}}</p>
+    <p>Denomination: {{one_user.denomination}}</p>
+    <p>Prefered Size: {{one_user.church_size}}</p>
+    <p>Importance of small groups: {{one_user.small_groups}}</p>
+        {% if one_user.id == request.session.user_id %}
+        <a href="/edit_user/{{one_user.id}}">Edit Your User</a>
+        {% endif %}
+</body>
+</html>

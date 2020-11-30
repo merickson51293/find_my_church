@@ -2,26 +2,46 @@
     padding: 5px;
 }
 
+div#header{
+    border-bottom: black solid 2px;
+}
+
 h1{
     display: inline-block;
-    margin-right: 40%;
+    margin-right: 60%;
 }
 
 h3{
+    margin-top: 20px;
     text-align: center;
+    margin-bottom: 30px;
+    
 }
 
 div#reg{
     display:inline-block;
-    width: 49%;
     text-align: center;
+    border: solid black 2px;
+    border-collapse: collapse;
+    padding: 20px;
+    padding-top: 0px;
+    margin-left: 25%;
 }
 
 div#login{
     display: inline-block;
-    width: 49%;
     vertical-align: top;
     text-align: center;
+    border: solid black 2px;
+    border-collapse: collapse;
+    padding: 20px;
+    padding-top: 0px;
+
+    margin-left: 10%;
+}
+
+p#small{
+    font-size: 15px;
 }
 
 #reg_form{

@@ -96,7 +96,13 @@ def create_user_contact(request):
         request.session['user_twitter']=f"{request.POST['user_twitter']}"
         request.session['family']=f"{request.POST['family']}"
         request.session['user_phone']=f"{request.POST['user_phone']}"
-        return redirect('/user_church')
+        return redirect('/user_pic')
+
+def user_pic(request):
+    return render(request, "user_reg/user_pic.html")
+
+def upload_user_pic(request):
+    pass
 
 def user_church(request):
     return render(request, "user_reg/user_church.html")
@@ -179,13 +185,14 @@ def church_main(request):
 
 def church_profile(request, church_id):
     context={
-        'one_church': Church.objects.get(id=church_id)
+        'one_church': Church.objects.get(id=church_id),
+        'all_churches': Church.objects.all(),
     }
     return render(request, "church/church_profile.html", context)
 
 def logout(request):
     request.session.clear()
-    return redirect('/church_reg_log')
+    return redirect('/')
 
 def church_add_message(request):
     message = Message.objects.create(message=request.POST['message'], church=Church.objects.get(id=request.session['church_id']))
@@ -254,3 +261,9 @@ def user_add_comment(request, message_id):
     message = Message.objects.get(id=message_id)
     comment = UserComments.objects.create(comment=request.POST['comment'], user=user, wall_message=message)
     return redirect('/user_home_page')
+
+def user_profile(request, user_id):
+    context={
+        'one_user': User.objects.get(id=user_id)
+    }
+    return render(request, "user/user_profile.html", context)

@@ -13,6 +13,8 @@ urlpatterns = [
     path('user_info', views.user_info),
     path('create_church_contact', views.create_church_contact),
     path('create_user_contact', views.create_user_contact),
+    path('user_pic', views.user_pic),
+    path('upload_user_pic', views.upload_user_pic),
     path('church_contact', views.church_contact),
     path('user_contact', views.user_contact),
     path('user_church', views.user_church),
@@ -37,4 +39,5 @@ urlpatterns = [
     path('delete_church/<int:church_id>', views.delete_church),
     path('church_home_page', views.church_home_page),
     path('user_home_page', views.user_home_page),
+    path('user_profile/<int:user_id>', views.user_profile),
 ]
