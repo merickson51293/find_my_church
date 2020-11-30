@@ -15,13 +15,21 @@ h3{
     text-align: center;
 }
 
+p#small{
+    font-size: 15px;
+}
+
+div#header > a{
+    text-decoration: none;
+}
+
 div#reg{
     display:inline-block;
     border: solid black 2px;
     border-collapse: collapse;
     padding: 20px;
     padding-top: 0px;
-    margin-left: 10%;
+    margin-left: 25%;
     text-align: center;
 }
 
@@ -31,7 +39,7 @@ div#login{
     border-collapse: collapse;
     padding: 20px;
     padding-top: 0px;
-    margin-left: 25%;
+    margin-left: 10%;
     vertical-align: top;
     text-align: center;
 }

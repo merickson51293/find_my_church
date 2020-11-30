@@ -4,32 +4,61 @@ div#wrapper{
 
 h1{
     display: inline-block;
-    width: 50%;
+    width: 30%;
     margin-right: 41%;
 }
 
 div#top{
-    
+    border-bottom: black 2px solid;
 }
 
-h2{
-    display: inline-block;
-    width: 50%;
+h3{
+    text-align: center;
+}
+
+a.profile{
+    margin-right: 10%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    padding-bottom: 0px;
+}
+
+#nav_icons{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    padding-bottom: 0px;
 }
 
 div#top > a{
+
     display: inline-block;
-    vertical-align: top;
+
     margin-top: 5px;
+    text-decoration: none;
 }
 
 div#top_left{
+    text-align: center;
+    margin-left: 10%;
     display: inline-block;
-    width: 50%;
+    border-collapse: collapse;
     vertical-align: top;
     border: 2px solid black;
+    padding: 10px;
+}
+
+p#add_message{
+    padding-top: 0px;
+    margin-top: 0px;
 }
 
 div#top_right{
+    text-align: center;
     display: inline-block;
+    margin-left: 18%;
+    border: 2px black solid;
+    padding: 10px;
+    width: 30%;
 }

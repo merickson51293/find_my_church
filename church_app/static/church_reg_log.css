@@ -28,6 +28,10 @@ div#reg{
     margin-left: 25%;
 }
 
+div#header > a{
+    text-decoration: none;
+}
+
 div#login{
     display: inline-block;
     vertical-align: top;
