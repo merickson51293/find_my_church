@@ -5,27 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Profile</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
 </head>
 <body>
     <div id="top">
-        <h1>{{one_user.first_name}} {{one_user.last_name}}'s Profile Page</h1>
-        <a href="/user_home_page"><button>Home Page</button></a>
-        <a href="/logout"><button>Logout</button></a>
-    </div>  
-    <p>Street Address: {{one_user.address}}</p>
-    <p>City and State: {{one_user.user_city_state}}</p>
-    <p>Website: {{one_user.user_email}}</p>
-    <h3>Social Media</h3>
-    <p>Facebook: <a href="https://www.{{one_user.facebook}}">{{one_user.user_facebook}}</a></p>
-    <p>Instagram: {{one_user.user_instagram}}</p>
-    <p>Twitter: {{one_user.user_twitter}}</p>
-    <p>Phone Number: {{one_user.user_phone}}</p>
-    <p>Denomination: {{one_user.denomination}}</p>
-    <p>Prefered Size: {{one_user.church_size}}</p>
-    <p>Importance of small groups: {{one_user.small_groups}}</p>
-        {% if one_user.id == request.session.user_id %}
-        <a href="/edit_user/{{one_user.id}}">Edit Your User</a>
-        {% endif %}
+        <h1>Community Church Finder</h1>
+        <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
+        <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
+        <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
+        <a href="/logout"><img id="nav_icons" src="{% static '/logout.png' %}" alt="Logout"></a>
+    </div>
+    <div id="profilepic">
+        <img id="profile" src="{% static '/profile_pic.png' %}" alt="profile pic">
+        <h2>{{one_user.first_name}} {{one_user.last_name}}</h2>
+    </div>
+    <div id="user_info">
+        <div id="info_one">
+            <h3>User Info</h3>
+            <p>Email: {{one_user.email}}</p>
+            <p>Phone Number: {{one_user.user_phone}}</p>
+            <p>Street Address: {{one_user.user_address}}</p>
+            <p>City and State: {{one_user.user_city_state}}</p>
+            <p>Family: {{one_user.family}}</p>
+        </div>
+        <div id="info_two">
+            <h3>Social Media</h3>
+            <p>Facebook: <a href="https://www.{{one_user.facebook}}">{{one_user.user_facebook}}</a></p>
+            <p>Instagram: {{one_user.user_instagram}}</p>
+            <p>Twitter: {{one_user.user_twitter}}</p>
+            
+            <p>Prefered Denomination: </p>
+        </div>
+        <div id="info_three">
+            <h3>Church Preference</h3>
+            <p>Prefered Size: {{one_user.church_size}}</p>
+            <p>Importance of student programs: {{one_user.student_programs}}</p>
+            <p>Importance of small groups: {{one_user.small_groups}}</p>
+                {% if one_user.id == request.session.user_id %}
+                <a href="/edit_user/{{one_user.id}}">Edit Your User</a>
+                {% endif %}
+            </div>
+        
+    </div>
 </body>
 </html>

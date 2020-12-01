@@ -31,6 +31,7 @@ urlpatterns = [
     path('church_main', views.church_main),
     path('church_profile/<int:church_id>', views. church_profile),
     path('edit_church/<int:church_id>', views.edit_church),
+    path('edit_user/<int:user_id>', views.edit_user),
     path('edit/<int:church_id>', views.edit),
     path('church_add_message', views.church_add_message),
     path('church_add_comment/<int:message_id>', views.church_add_comment),

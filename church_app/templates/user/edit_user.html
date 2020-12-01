@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Church</title>
+    {% load static %}
+</head>
+<body>
+    <h1>Edit {{request.session.first_name}} {{request.session.last_name}}'s page</h1>
+    <form action="/edit/{{request.session.church_id}}" method="post">
+        {% csrf_token %}
+    Address: <input type="text" name="address" value="{{one_user.user_address}}"></br>
+    City and State: <input type="text" name="city_state" value="{{one_church.city_state}}"></br>
+    Website: <input type="text" name="website" value="{{one_church.website}}"></br>
+    Facebook: <input type="text" name="facebook" value="{{one_church.facebook}}"></br>
+    Instagram: <input type="text" name="instagram" value="{{one_church.instagram}}"></br>
+    Twitter: <input type="text" name="twitter" value="{{one_church.twitter}}"></br>
+    Church Email: <input type="text" name="church_email" value="{{one_church.church_email}}"></br>
+    Church Phone Number: <input type="text" name="church_phone" value="{{one_church.church_phone}}"></br>
+    Denomination: <input type="text" name="denomination" value="{{one_church.denomination}}"></br>
+    Values and Beliefs: <input type="text" name="values" value="{{one_church.values}}"></br>
+    Size: <input type="text" name="size" value="{{one_church.size}}"></br>
+    Percentage of 0-10 year olds: <input type="text" name="youngest" value="{{one_church.youngest}}"></br>
+    Percentage of 10-20 year olds: <input type="text" name="younger" value="{{one_church.younger}}"></br>
+    Percentage of 20-30 year olds: <input type="text" name="young" value="{{one_church.young}}"></br>
+    Percentage of 30-50 year olds: <input type="text" name="old"value="{{one_church.old}}"></br>
+    Percentage of 50+ year olds: <input type="text" name="oldest" value="{{one_church.oldest}}"></br>
+    Other: <input type="text" name="other" value="{{one_church.other}}"></br>
+    <input type="submit" value="Edit">
+    </form>
+</body>
+</html>

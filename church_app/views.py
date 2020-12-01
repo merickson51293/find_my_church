@@ -201,12 +201,12 @@ def church_add_message(request):
 def delete(request, message_id):
     message=Message.objects.get(id=message_id)
     message.delete()
-    return redirect('/home_page')
+    return redirect('/user_home_page')
 
 def delete_church(request, church_id):
     church=Church.objects.get(id=church_id)
     church.delete()
-    return redirect('/home_page')
+    return redirect('/user_home_page')
 
 def church_home_page(request):
     context={
@@ -227,6 +227,12 @@ def edit_church(request, church_id):
         'one_church': Church.objects.get(id=church_id)
     }
     return render(request, "church/edit_church.html", context)
+
+def edit_user(request, user_id):
+    context={
+        'one_user': User.objects.get(id=user_id)
+    }
+    return render(request, "user/edit_user.html", context)
 
 def edit(request, church_id):
     edit = Church.objects.get(id=church_id)

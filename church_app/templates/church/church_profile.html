@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Profile</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
 </head>
 <body>
     <div id="top">
-        <h1>{{one_church.church_name}}'s Profile Page</h1>
-        <a href="/user_home_page"><button>Home Page</button></a>
-        <a href="/logout"><button>Logout</button></a>
+        <h1>Community Church Finder</h1>
+        <img id="nav_icons" src="{% static '/notifications.png' %}" alt="notifications">
+        <img id="nav_icons" src="{% static '/messages.png' %}" alt="messages">
+        <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
+        <a href="/logout">Logout</a>
     </div>  
     <p>Street Address: {{one_church.address}}</p>
     <p>City and State: {{one_church.city_state}}</p>

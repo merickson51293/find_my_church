@@ -5,7 +5,7 @@ div#wrapper{
 h1{
     display: inline-block;
     width: 30%;
-    margin-right: 41%;
+    margin-right: 10%;
 }
 
 div#top{
@@ -31,6 +31,11 @@ a.profile{
     padding-bottom: 0px;
 }
 
+.search-container{
+    display: inline-block;
+    margin-right: 20%;
+}
+
 div#top > a{
 
     display: inline-block;
@@ -42,6 +47,7 @@ div#top > a{
 div#top_left{
     text-align: center;
     margin-left: 10%;
+    width: 30%;
     display: inline-block;
     border-collapse: collapse;
     vertical-align: top;

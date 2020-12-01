@@ -1,0 +1,62 @@
+div#top > h1{
+    display: inline-block;
+    margin-right: 60%
+}
+
+#profilepic{
+    display: inline-block;
+    text-align: center;
+    padding: 25px;
+    vertical-align: top;
+    margin-right: 50px;
+    margin-left: 150px;
+}
+
+#profile{
+    margin-top: 10px;
+    width: 200px;
+    display: inline-block;
+    
+}
+
+#user_info{
+    display: inline-block;
+    border: 2px black solid;
+    padding: 10px;
+    margin-top: 25px;
+    height: 250px;
+    padding-top:0px;
+    padding-bottom: 0px;
+}
+
+#info_one{
+    margin-left: 20px;
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+#info_two{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#info_three{
+    display: inline-block;
+    margin-right: 20px;
+
+}
+
+div#top{
+    border-bottom: black 2px solid;
+}
+
+#nav_icons{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    padding-bottom: 0px;
+
+div#top > a{
+    display: inline-block;
+}

@@ -11,8 +11,14 @@
 <div id="wrapper">
     <div id="top">
         <h1>Community Church Finder</h1>
-        <img id="nav_icons" src="{% static '/notifications.png' %}" alt="notifications">
-        <img id="nav_icons" src="{% static '/messages.png' %}" alt="messages">
+        <div class="search-container">
+            <form action="/action_page.php">
+              <input type="text" placeholder="Search.." name="search">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
+        <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
         <a class="profile" href="/user_profile/{{request.session.user_id}}"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
         <a href="/logout">Logout</a>
     </div>
@@ -25,6 +31,7 @@
             <p>Website: <a href="https://www.{{churches.website}}">{{churches.website}}</a></p>
            <p>Denomination: {{churches.denomination}}</p>
            <p>Values and Beliefs: {{churches.values}}</p>
+           <!-- <a href="/delete_church/{{churches.id}}">Delete</a> -->
         {% endfor %}
     </div>
     <div id="top_right">
@@ -38,15 +45,16 @@
         <div id="messages">
                 <h3>{{messages.message}}</h3>
                 <h5>- <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
+                <!-- <a href="/delete/{{messages.id}}">Delete</a> -->
         </div>
         <div id="comment">
             {% for comment in messages.church_post_comments.all %}
             <p>{{comment.comment}}</p>
-            <p>Commented by: {{comment.church.church_name}}{{comment.user.first_name}}</p>
+            <p>Commented by: <a href="/church_profile/{{comment.church.id}}">{{comment.church.church_name}}{{comment.user.first_name}}</a></p>
             {% endfor %}
             {% for comment in messages.user_post_comments.all %}
             <p>{{comment.comment}}</p>
-            <p>Commented by: {{comment.user.first_name}} {{comment.user.last_name}}</p>
+            <p>Commented by: <a href="/user_profile/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a></p>
             {% endfor %}
             <form action="/user_add_comment/{{messages.id}}" method="post">
                 {% csrf_token %}
