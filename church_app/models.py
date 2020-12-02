@@ -58,6 +58,12 @@ class User(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     objects=UserManager()
 
+class UserPic(models.Model):
+    user_Img=models.ImageField(upload_to='images')
+    user=models.ForeignKey(User, related_name="user_pic", on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
 class ChurchManager(models.Manager):
     def church_validator(self, postdata):
         email_check=re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -119,9 +125,15 @@ class Pastor(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-class Message(models.Model):
+class ChurchMessage(models.Model):
     message=models.TextField()
     church= models.ForeignKey(Church, related_name='church_message', on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
+class UserMessage(models.Model):
+    message=models.TextField()
+    user= models.ForeignKey(User, related_name='user_message', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
@@ -131,16 +143,16 @@ class DirectMessages(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-class ChurchComments(models.Model):
-    comment=models.CharField(max_length=255)
-    church= models.ForeignKey(Church, related_name='church_comment', on_delete=models.CASCADE)
-    wall_message= models.ForeignKey(Message, related_name='church_post_comments', on_delete=models.CASCADE)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+# class ChurchComments(models.Model):
+#     comment=models.CharField(max_length=255)
+#     church= models.ForeignKey(Church, related_name='church_comment', on_delete=models.CASCADE)
+#     wall_message= models.ForeignKey(Message, related_name='church_post_comments', on_delete=models.CASCADE)
+#     created_at=models.DateTimeField(auto_now_add=True)
+#     updated_at=models.DateTimeField(auto_now=True)
 
-class UserComments(models.Model):
-    comment=models.CharField(max_length=255)
-    user= models.ForeignKey(User, related_name='user_comment', on_delete=models.CASCADE)
-    wall_message= models.ForeignKey(Message, related_name='user_post_comments', on_delete=models.CASCADE)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+# class UserComments(models.Model):
+#     comment=models.CharField(max_length=255)
+#     user= models.ForeignKey(User, related_name='user_comment', on_delete=models.CASCADE)
+#     wall_message= models.ForeignKey(Message, related_name='user_post_comments', on_delete=models.CASCADE)
+#     created_at=models.DateTimeField(auto_now_add=True)
+#     updated_at=models.DateTimeField(auto_now=True)

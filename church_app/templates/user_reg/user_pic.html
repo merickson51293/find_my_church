@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_pic.css' %}">
 </head>
 <body>
+    <div id="top">
+        <h1>Community Church Finder</h1>
+        <h3>Welcome {{request.session.first_name}} {{request.session.last_name}}</h3>
+    </div>
+    <div id="info">
     <h2>Please upload a profile picture!</h2>
-    <form action="/user_church" method="post">
+    <form method = "post" enctype="multipart/form-data"> 
+        {% csrf_token %} 
+        {{form.as_p}} 
+        <input type="submit" value="Upload"> 
+    </form> 
+    <!-- <form action="/user_church" method="post">
         {% csrf_token %}
         <label for="img">Select image:</label>
-        <input type="file" id="img" name="img" accept="image/*">
-        <input type="submit">
-    </form>
+        <input type="file" id="img" name="img" accept="image/*"></br></br>
+        <input id="button" type="submit">
+    </form> -->
+</div>
 </body>
 </html>

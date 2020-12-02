@@ -1,5 +1,9 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import *
+
 
 urlpatterns = [
     path('', views.index),
@@ -33,12 +37,13 @@ urlpatterns = [
     path('edit_church/<int:church_id>', views.edit_church),
     path('edit_user/<int:user_id>', views.edit_user),
     path('edit/<int:church_id>', views.edit),
-    path('church_add_message', views.church_add_message),
+    path('add_message', views.add_message),
     path('church_add_comment/<int:message_id>', views.church_add_comment),
     path('user_add_comment/<int:message_id>', views.user_add_comment),
-    path('delete/<int:message_id>', views.delete),
+    # path('delete/<int:message_id>', views.delete),
     path('delete_church/<int:church_id>', views.delete_church),
-    path('church_home_page', views.church_home_page),
-    path('user_home_page', views.user_home_page),
+    path('church_home_page', views.home_page),
+    path('user_home_page', views.home_page),
     path('user_profile/<int:user_id>', views.user_profile),
-]
+    path('upload', views.image_upload_view),
+] 

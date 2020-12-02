@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Info Input</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+    <link rel="stylesheet" href="{% static 'user_info.css' %}">
 </head>
 <body>
-    <h1>Thank you {{request.session.first_name}} {{request.session.last_name}} for registering at CommunityChurchFinder.com</h1>
-    <h2>On the next couple of pages, please tell us about yourself. This will help us find you a new church to call home.</h2>
-    <a href="/user_contact"><input type="button" value="Next"></a>
+    <div id="top">
+        <h1>Community Church Finder</h1>
+        <h3>Welcome {{request.session.first_name}} {{request.session.last_name}}</h3>
+    </div>
+    <div id="info">
+        <h2>Thank you for registering at CommunityChurchFinder.com</h1>
+        <h4>On the next couple of pages, please tell us about yourself. This will help us find you a new church to call home.</h2>
+        <a href="/user_contact"><input id="button" type="button" value="Next"></a>
+    </div>
 </body>
 </html>

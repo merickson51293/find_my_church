@@ -1,7 +1,9 @@
+from django.http import HttpResponse 
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 from .models import *
+from .forms import *
 
 def index(request):
     return render(request, "user_reg/index.html")
@@ -99,7 +101,17 @@ def create_user_contact(request):
         return redirect('/user_pic')
 
 def user_pic(request):
-    return render(request, "user_reg/user_pic.html")
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        print("being to process post request")
+        if form.is_valid():
+            print("post data was valid")
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'user_reg/user_church.html', {'form': form, 'img_obj': img_obj})
+    form=ImageForm()
+    return render(request, "user_reg/user_pic.html", {'form' : form})
 
 def upload_user_pic(request):
     pass
@@ -194,33 +206,39 @@ def logout(request):
     request.session.clear()
     return redirect('/')
 
-def church_add_message(request):
-    message = Message.objects.create(message=request.POST['message'], church=Church.objects.get(id=request.session['church_id']))
-    return redirect('/church_home_page')
+def add_message(request):
+    if "church_id" in request.session:
+        message = ChurchMessage.objects.create(message=request.POST['message'], church=Church.objects.get(id=request.session['church_id']))
+        return redirect('/church_home_page')
+    elif "user_id" in request.session:
+        message = UserMessage.objects.create(message=request.POST['message'], user=User.objects.get(id=request.session['user_id']))
+        return redirect('/church_home_page')
 
-def delete(request, message_id):
-    message=Message.objects.get(id=message_id)
-    message.delete()
-    return redirect('/user_home_page')
+# def delete(request, message_id):
+#     message=Message.objects.get(id=message_id)
+#     message.delete()
+#     return redirect('/user_home_page')
 
 def delete_church(request, church_id):
     church=Church.objects.get(id=church_id)
     church.delete()
     return redirect('/user_home_page')
 
-def church_home_page(request):
-    context={
-        'all_churches': Church.objects.all(),
-        'all_messages': Message.objects.all(),
-    }
-    return render(request, "church_home_page.html", context)
+# def church_home_page(request):
+#     context={
+#         'all_churches': Church.objects.all(),
+#         'all_messages': Message.objects.all(),
+#     }
+#     return render(request, "church_home_page.html", context)
 
-def user_home_page(request):
+def home_page(request):
     context={
         'all_churches': Church.objects.all(),
-        'all_messages': Message.objects.all(),
+        'all_users':User.objects.all(),
+        'all_user_messages': UserMessage.objects.all(),
+        'all_church_messages': ChurchMessage.objects.all(),
     }
-    return render(request, "user_home_page.html", context)
+    return render(request, "home_page.html", context)
 
 def edit_church(request, church_id):
     context={
@@ -273,3 +291,16 @@ def user_profile(request, user_id):
         'one_user': User.objects.get(id=user_id)
     }
     return render(request, "user/user_profile.html", context)
+
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'user_reg/user_info_other.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'user_reg/user_info_other.html', {'form': form})

@@ -25,26 +25,28 @@
     <h3>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h3>
     <div id="top_left">
         <h3>Possible Churches in your area</h3>
-        {% for churches in all_churches %}
+        <!-- {% for churches in all_churches %}
             <a href="/church_profile/{{churches.id}}"><h3>{{churches.church_name}}</h3></a>
             <p>City and State: {{churches.city_state}}</p>
             <p>Website: <a href="https://www.{{churches.website}}">{{churches.website}}</a></p>
            <p>Denomination: {{churches.denomination}}</p>
            <p>Values and Beliefs: {{churches.values}}</p>
-           <!-- <a href="/delete_church/{{churches.id}}">Delete</a> -->
-        {% endfor %}
+           <a href="/delete_church/{{churches.id}}">Delete</a>
+        {% endfor %} -->
+   
+        <h3>People in your area</h3> 
     </div>
     <div id="top_right">
         <h3>The Wall</h3>
-        <form action="/user_add_message" method="post">
+        <form action="/add_message" method="post">
             {% csrf_token %}
         <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
         <input id="submit" type="submit" value="Add Message">
         </form>
-        {% for messages in all_messages %}
+        {% for messages in all_user_messages %}
         <div id="messages">
                 <h3>{{messages.message}}</h3>
-                <h5>- <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
+                <h5>- <a href="/user_profile/{{messages.user.id}}">{{messages.user.first_name}} {{messages.user.last_name}}</a></h5>
                 <!-- <a href="/delete/{{messages.id}}">Delete</a> -->
         </div>
         <div id="comment">

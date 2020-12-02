@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_contact.css' %}">
 </head>
 <body>
+    <div id="top">
+        <h1>Community Church Finder</h1>
+        <h3>Welcome {{request.session.first_name}} {{request.session.last_name}}</h3>
+    </div>
+    <div id="info">
     <h2>Please tell us your Contact Information</h2>
     <form action="/create_user_contact" method="post">
         {% csrf_token %}
@@ -14,15 +21,15 @@
         <p>Address: <input type="text" name="user_address"></p>
         <p>City and State: <input type="text" name="user_city_state"></p>
         <p>Email: <input type="text" name="user_email"></p>
+        <p>Phone Number: <input type="text" name="user_phone"></p>
+        <p>Number in Household: <input type="number" name="family"></p>
         <p>Social Media</p>
         <p>Facebook: <input type="text" name="user_facebook"></p>
         <p>Instagram: <input type="text" name="user_instagram"></p>
         <p>Twitter: <input type="text" name="user_twitter"></p>
-        <p>Family Members (Name and age): <textarea name="family" cols="30" rows="10" placeholder="EX. Husband - John Doe - 25 Years Old"></textarea></p>
-        <p>Phone Number: <input type="text" name="user_phone"></p>
-        </br>
-        <input type="submit" value="Next">
+        <input id="button" type="submit" value="Next">
     </form>
-    <a href="/user_info"><button>Back</button></a>
+</br><a href="/user_info"><button id="button1">Back</button></a>
+</div>
 </body>
 </html>
