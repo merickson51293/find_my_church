@@ -6,6 +6,39 @@
     <title>Church Profile</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrniwZJcCz-23od5YakpQSe3pOIslnYc&callback=initMap">
+    </script>
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
+    <script>
+      function initMap() {
+        geocoder = new google.maps.Geocoder();
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 4,
+          center: uluru,
+        });
+        
+        geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+      }
+    </script>
 </head>
 <body>
     <div id="top">
@@ -40,5 +73,8 @@
         {% if one_church.id == request.session.church_id %}
         <a href="/edit_church/{{one_church.id}}">Edit Your Church</a>
         {% endif %}
+        <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
 </body>
 </html>

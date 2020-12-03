@@ -20,11 +20,12 @@
         <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
         <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
         <a class="profile" href="/user_profile/{{request.session.user_id}}"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
+        <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
         <a href="/logout">Logout</a>
     </div>
     <h3>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h3>
     <div id="top_left">
-        <h3>Possible Churches in your area</h3>
+        <h3><a href="/area_churches">Possible Churches in your area</a></h3>
         <!-- {% for churches in all_churches %}
             <a href="/church_profile/{{churches.id}}"><h3>{{churches.church_name}}</h3></a>
             <p>City and State: {{churches.city_state}}</p>
@@ -34,7 +35,7 @@
            <a href="/delete_church/{{churches.id}}">Delete</a>
         {% endfor %} -->
    
-        <h3>People in your area</h3> 
+        <h3><a href="/local_people">People in your area</a></h3> 
     </div>
     <div id="top_right">
         <h3>The Wall</h3>

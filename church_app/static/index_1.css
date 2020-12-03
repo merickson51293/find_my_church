@@ -1,0 +1,42 @@
+
+#top{
+    height: 1000px;
+}
+
+button{
+    display: inline-block;
+    
+    margin-top: 15px;
+    padding: 10px;
+}
+
+#church{
+    display: inline-block;
+    margin-left: 40%;
+}
+h1{
+    padding-left: 20px;
+    display: inline-block;
+    width: 35%;
+}
+a{
+    text-decoration: none;
+}
+
+#overlay{
+    text-align: center;
+    margin-top: 25%;
+    border: white 2px solid;
+    border-collapse: collapse;
+    display: inline-block;
+    background-color: grey;
+    opacity: .8;
+    border-radius: 15px;
+    margin-left: 42%;
+    padding: 20px;
+}
+
+#overlay:hover{
+    background-color: grey;
+    opacity: 1;
+}

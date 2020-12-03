@@ -6,7 +6,10 @@ from .models import *
 from .forms import *
 
 def index(request):
-    return render(request, "user_reg/index.html")
+    return render(request, "index.html")
+
+def user_reg(request):
+    return render(request, "user_reg/user_reg.html")
 
 def church_reg_log(request):
     return render(request, "church_reg/church_reg_log.html")
@@ -305,5 +308,14 @@ def image_upload_view(request):
         form = ImageForm()
     return render(request, 'user_reg/user_info_other.html', {'form': form})
 
-def maps(request):
-    return render(request, "maps.html")
+def local_people(request):
+    context={
+        'local_person': User.objects.all()
+    }
+    return render(request, "local_people.html", context)
+
+def area_churches(request):
+    context={
+        'area_church': Church.objects.all()
+    }
+    return render(request, "area_churches.html", context)
