@@ -11,13 +11,13 @@
 <div id="wrapper">
     <div id="header">
         <h1>Community Church Finder</h1>
-        <a href="/">User Registration and Login</a>
+        <a href="/user_reg">User Registration and Login</a>
     </div>
     <h3>Looking for new members? Want more people to know about your church? Community Church finder is made to match churches and prospective members in the easiest way possible!</h3>
     <div id="reg">
         <h2>Church Registration</h2>
         
-        <form action="/create_church" method="post" >
+        <form action="/create_church" method="post">
             {% csrf_token %}
             Church Name:<input type="text" name="church_name"id="reg_form"></br>
             Admin Name:<input type="text" name="admin_name"id="reg_form"></br>

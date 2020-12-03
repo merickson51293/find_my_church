@@ -1,0 +1,36 @@
+#main{
+    height: 1000px;
+
+}
+
+#info{
+    border: black 2px solid;
+    display: inline-block;
+    border-collapse: collapse;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background-color: white;
+    margin-top: 250px;
+    text-align: center;
+    margin-left: 22%;
+    border-radius: 10px;
+}
+
+button{
+    display: inline-block;
+    
+    margin-top: 15px;
+    padding: 10px;
+}
+
+h1{
+    padding-left: 20px;
+    display: inline-block;
+    width: 35%;
+    margin-right:40%;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
