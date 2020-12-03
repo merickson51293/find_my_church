@@ -7,6 +7,7 @@ from .views import *
 
 urlpatterns = [
     path('', views.index),
+    path('guest', views.guest),
     path('user_reg', views.user_reg),
     path('church_reg_log', views.church_reg_log),
     path('create_user', views.create_user),

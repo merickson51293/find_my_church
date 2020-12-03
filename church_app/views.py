@@ -8,6 +8,9 @@ from .forms import *
 def index(request):
     return render(request, "index.html")
 
+def guest(request):
+    return render(request, "guest.html")
+
 def user_reg(request):
     return render(request, "user_reg/user_reg.html")
 
