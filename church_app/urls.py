@@ -46,4 +46,5 @@ urlpatterns = [
     path('user_home_page', views.home_page),
     path('user_profile/<int:user_id>', views.user_profile),
     path('upload', views.image_upload_view),
+    path('maps', views.maps),
 ] 

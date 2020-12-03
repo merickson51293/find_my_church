@@ -304,3 +304,6 @@ def image_upload_view(request):
     else:
         form = ImageForm()
     return render(request, 'user_reg/user_info_other.html', {'form': form})
+
+def maps(request):
+    return render(request, "maps.html")
