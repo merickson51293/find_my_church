@@ -39,6 +39,7 @@ div#top > h1{
 #info_two{
     display: inline-block;
     margin-right: 20px;
+    vertical-align: top;
 }
 
 #info_three{

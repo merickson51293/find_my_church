@@ -14,7 +14,7 @@
       #map {
         height: 400px;
         /* The height is 400 pixels */
-        width: 50%;
+        width: 30%;
         /* The width is the width of the web page */
       }
     </style>
@@ -41,18 +41,19 @@
 <body>
     <div id="top">
         <h1>Community Church Finder</h1>
-        <img id="nav_icons" src="{% static '/notifications.png' %}" alt="notifications">
-        <img id="nav_icons" src="{% static '/messages.png' %}" alt="messages">
+        <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
+        <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
         <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
         <a href="/logout">Logout</a>
     </div>  
+    <h2>{{one_church.church_name}}</h2>
     <p id="address">Street Address: {{one_church.address}}</p>
-    <p>City and State: {{one_church.city_state}}</p>
-    <p>Website: {{one_church.website}}</p>
+    <p>City and State: {{one_church.church_city}}, {{one_church.church_state}}</p>
+    <p>Website: <a href="https://www.{{one_church.website}}">{{one_church.website}}</a></p>
+    <div id="map"></div>
     <h3>Social Media</h3>
     <p>Facebook: <a href="https://www.{{one_church.facebook}}">{{one_church.facebook}}</a></p>
     <p>Instagram: {{one_church.instagram}}</p>
-    <p>Twitter: {{one_church.twitter}}</p>
     <p>Church Email: {{one_church.church_email}}</p>
     <p>Church Phone Number: {{one_church.church_phone}}</p>
     <p>Denomination: {{one_church.denomination}}</p>
@@ -71,8 +72,7 @@
         {% if one_church.id == request.session.church_id %}
         <a href="/edit_church/{{one_church.id}}">Edit Your Church</a>
         {% endif %}
-        <h3>My Google Maps Demo</h3>
     <!--The div element for the map -->
-    <div id="map"></div>
+    
 </body>
 </html>

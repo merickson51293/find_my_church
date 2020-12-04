@@ -19,8 +19,8 @@
           </div>
         <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
         <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
-        <a class="profile" href="/user_profile/{{request.session.user_id}}"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
-        <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
+        <a href="/user_profile/{{request.session.user_id}}"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
+        <a class="profile" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
         <a href="/logout">Logout</a>
     </div>
     <h3>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h3>

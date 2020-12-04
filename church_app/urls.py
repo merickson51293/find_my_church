@@ -20,7 +20,6 @@ urlpatterns = [
     path('create_church_contact', views.create_church_contact),
     path('create_user_contact', views.create_user_contact),
     path('user_pic', views.user_pic),
-    path('upload_user_pic', views.upload_user_pic),
     path('church_contact', views.church_contact),
     path('user_contact', views.user_contact),
     path('user_church', views.user_church),

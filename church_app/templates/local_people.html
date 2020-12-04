@@ -19,11 +19,7 @@
     <h3>People in your local area</h3>
     {% for user in local_person %}
     <p><a href="/user_profile/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></p>
-    <ul>
-        <li>City and State: {{user.user_city_state}}</li>
-        <li>Email: {{user.user_email}}</li>
-        <li>Phone: {{user.user_phone}}</li>
-    </ul>
+        <p>Located in {{user.user_city}}, {{user.user_state}}</p>
     {% endfor %}
 </body>
 </html>

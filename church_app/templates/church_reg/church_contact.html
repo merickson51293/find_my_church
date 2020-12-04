@@ -11,13 +11,13 @@
     <h2>Please tell us about {{request.session.church_name}}'s Location and Contact Information</h2>
     <form action="/create_church_contact" method="post">
         {% csrf_token %}
-        <p>City and State: <input type="text" name="city_state"></p>
+        <p>City: <input type="text" name="church_city"></p>
+        <p>State: <input type="text" name="church_state"></p>
         <p>Address: <input type="text" name="address"></p>
         <p>Website: <input type="text" name="website"></p>
         <p>Social Media</p>
         <p>Facebook: <input type="text" name="facebook"></p>
         <p>Instagram: <input type="text" name="instagram"></p>
-        <p>Twitter: <input type="text" name="twitter"></p>
         <p>Email: <input type="email" name="church_email"></p>
         <p>Phone Number: <input type="text" name="church_phone"></p>
         <input type="submit" value="Next">

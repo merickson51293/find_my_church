@@ -96,7 +96,8 @@ def user_contact(request):
 
 def create_user_contact(request):
     if request.method=="POST":
-        request.session['user_city_state']=f"{request.POST['user_city_state']}"
+        request.session['user_city']=f"{request.POST['user_city']}"
+        request.session['user_state']=f"{request.POST['user_state']}"
         request.session['user_address']=f"{request.POST['user_address']}"
         request.session['user_email']=f"{request.POST['user_email']}"
         request.session['user_facebook']=f"{request.POST['user_facebook']}"
@@ -104,23 +105,7 @@ def create_user_contact(request):
         request.session['user_twitter']=f"{request.POST['user_twitter']}"
         request.session['family']=f"{request.POST['family']}"
         request.session['user_phone']=f"{request.POST['user_phone']}"
-        return redirect('/user_pic')
-
-def user_pic(request):
-    if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
-        print("being to process post request")
-        if form.is_valid():
-            print("post data was valid")
-            form.save()
-            # Get the current instance object to display in the template
-            img_obj = form.instance
-            return render(request, 'user_reg/user_church.html', {'form': form, 'img_obj': img_obj})
-    form=ImageForm()
-    return render(request, "user_reg/user_pic.html", {'form' : form})
-
-def upload_user_pic(request):
-    pass
+        return redirect('/user_church')
 
 def user_church(request):
     return render(request, "user_reg/user_church.html")
@@ -137,9 +122,22 @@ def user_info_other(request):
     return render(request, "user_reg/user_info_other.html")
 
 def finish_user(request):
-    new_user=User.objects.create(first_name=request.session['first_name'], last_name=request.session['last_name'], email=request.session['user_email'], password=request.session['password'], user_address=request.session['user_address'],user_city_state=request.session['user_city_state'], user_email=request.session['user_email'], user_facebook=request.session['user_facebook'], user_instagram=request.session['user_instagram'], user_twitter=request.session['user_twitter'], family=request.session['family'], user_phone=request.session['user_phone'], denomination=request.session['denomination'], church_size=request.session['church_size'], student_programs=request.session['student_programs'], small_groups=request.session['small_groups'], user_info_other=request.POST['user_info_other'])
+    new_user=User.objects.create(first_name=request.session['first_name'], last_name=request.session['last_name'], email=request.session['user_email'], password=request.session['password'], user_address=request.session['user_address'],user_city=request.session['user_city'],user_state=request.session['user_state'], user_email=request.session['user_email'], user_facebook=request.session['user_facebook'], user_instagram=request.session['user_instagram'], user_twitter=request.session['user_twitter'], family=request.session['family'], user_phone=request.session['user_phone'], denomination=request.session['denomination'], church_size=request.session['church_size'], student_programs=request.session['student_programs'], small_groups=request.session['small_groups'], user_info_other=request.POST['user_info_other'])
     request.session['user_id']=new_user.id
-    return redirect("/user_home_page")
+    return redirect("/user_pic")
+
+def user_pic(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        print("being to process post request")
+        if form.is_valid():
+            print("post data was valid")
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'home_page.html', {'form': form, 'img_obj': img_obj})
+    form=ImageForm()
+    return render(request, "user_reg/user_pic.html", {'form' : form})
 
 def church_info(request):
     return render(request, "church_reg/church_info.html")
@@ -149,12 +147,12 @@ def church_contact(request):
 
 def create_church_contact(request):
     if request.method=="POST":
-        request.session['city_state']=f"{request.POST['city_state']}"
+        request.session['church_city']=f"{request.POST['church_city']}"
+        request.session['church_state']=f"{request.POST['church_state']}"
         request.session['address']=f"{request.POST['address']}"
         request.session['website']=f"{request.POST['website']}"
         request.session['facebook']=f"{request.POST['facebook']}"
         request.session['instagram']=f"{request.POST['instagram']}"
-        request.session['twitter']=f"{request.POST['twitter']}"
         request.session['church_email']=f"{request.POST['church_email']}"
         request.session['church_phone']=f"{request.POST['church_phone']}"
         return redirect('/church_beliefs')
@@ -178,7 +176,7 @@ def church_info_other(request):
     return render(request, "church_reg/church_info_other.html")
 
 def create_church_info_other(request):
-    new_church=Church.objects.create(church_name=request.session['church_name'], admin_name=request.session['admin_name'], admin_email=request.session['admin_email'], password=request.session['password'], city_state=request.session['city_state'], address=request.session['address'],website=request.session['website'],facebook=request.session['facebook'], instagram=request.session['instagram'], twitter=request.session['twitter'], church_email=request.session['church_email'], church_phone=request.session['church_phone'], denomination=request.session['denomination'], values=request.session['values'], size=request.session['size'], youngest=request.session['youngest'], younger=request.session['younger'], young=request.session['young'], old=request.session['old'], oldest=request.session['oldest'], other=request.POST['other'])
+    new_church=Church.objects.create(church_name=request.session['church_name'], admin_name=request.session['admin_name'], admin_email=request.session['admin_email'], password=request.session['password'], church_city=request.session['church_city'], church_state=request.session['church_state'], address=request.session['address'],website=request.session['website'],facebook=request.session['facebook'], instagram=request.session['instagram'], church_email=request.session['church_email'], church_phone=request.session['church_phone'], denomination=request.session['denomination'], values=request.session['values'], size=request.session['size'], youngest=request.session['youngest'], younger=request.session['younger'], young=request.session['young'], old=request.session['old'], oldest=request.session['oldest'], other=request.POST['other'])
     request.session['church_id']=new_church.id
     return redirect('/church_pastor')
 
@@ -282,13 +280,13 @@ def edit(request, church_id):
 
 def church_add_comment(request, message_id):
     church = Church.objects.get(id=request.session['church_id'])
-    message = Message.objects.get(id=message_id)
+    message = UserMessage.objects.get(id=message_id)
     comment = ChurchComments.objects.create(comment=request.POST['comment'], church=church, wall_message=message)
     return redirect('/church_home_page')
 
 def user_add_comment(request, message_id):
     user = User.objects.get(id=request.session['user_id'])
-    message = Message.objects.get(id=message_id)
+    message = UserMessage.objects.get(id=message_id)
     comment = UserComments.objects.create(comment=request.POST['comment'], user=user, wall_message=message)
     return redirect('/user_home_page')
 
