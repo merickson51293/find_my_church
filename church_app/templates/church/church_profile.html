@@ -7,6 +7,7 @@
     <title>Church Profile</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'profile.css' %}">
+    {% block content %}
     <script defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrniwZJcCz-23od5YakpQSe3pOIslnYc&callback=initMap">
     </script>
@@ -47,7 +48,7 @@
         <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
         <a href="/logout">Logout</a>
     </div>   -->
-    {% block content %}
+    
     <h2>{{one_church.church_name}}</h2>
     <p id="address">Street Address: {{one_church.address}}</p>
     <p>City and State: {{one_church.church_city}}, {{one_church.church_state}}</p>
