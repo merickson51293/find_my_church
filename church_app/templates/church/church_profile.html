@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,13 +40,14 @@
     </script>
 </head>
 <body>
-    <div id="top">
+    <!-- <div id="top">
         <h1>Community Church Finder</h1>
         <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
         <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
         <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
         <a href="/logout">Logout</a>
-    </div>  
+    </div>   -->
+    {% block content %}
     <h2>{{one_church.church_name}}</h2>
     <p id="address">Street Address: {{one_church.address}}</p>
     <p>City and State: {{one_church.church_city}}, {{one_church.church_state}}</p>
@@ -57,7 +59,7 @@
     <p>Church Email: {{one_church.church_email}}</p>
     <p>Church Phone Number: {{one_church.church_phone}}</p>
     <p>Denomination: {{one_church.denomination}}</p>
-    <p>Values and Beliefs: {{one_church.values}}</p>
+    <p>Values and Beliefs: <a href="{{one_church.values}}">{{one_church.values}}</a></p>
     <p>Church Size: {{one_church.size}}</p>
     <p>Percentage of 0-10 year olds: {{one_church.youngest}}%</p>
     <p>Percentage of 10-20 year olds: {{one_church.younger}}%</p>
@@ -73,6 +75,6 @@
         <a href="/edit_church/{{one_church.id}}">Edit Your Church</a>
         {% endif %}
     <!--The div element for the map -->
-    
+    {% endblock %}
 </body>
 </html>

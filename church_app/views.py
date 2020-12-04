@@ -5,6 +5,7 @@ import bcrypt
 from .models import *
 from .forms import *
 
+
 def index(request):
     return render(request, "index.html")
 
@@ -211,12 +212,14 @@ def logout(request):
     return redirect('/')
 
 def add_message(request):
-    if "church_id" in request.session:
-        message = ChurchMessage.objects.create(message=request.POST['message'], church=Church.objects.get(id=request.session['church_id']))
-        return redirect('/church_home_page')
-    elif "user_id" in request.session:
-        message = UserMessage.objects.create(message=request.POST['message'], user=User.objects.get(id=request.session['user_id']))
-        return redirect('/church_home_page')
+    user_obj=null
+    church_obj=null
+    if request.session.UserType==2:
+        church_obj=Church.objects.get(id=request.sesssion.church_id)
+    elif request.session.UserType==1:
+        user_obj=User.objects.get(id=request.session.user_id)
+    message = Message.objects.create(message=request.POST['message'], church=church_obj, user=user_obj, user_type=null)
+    return redirect('/home_page')
 
 # def delete(request, message_id):
 #     message=Message.objects.get(id=message_id)
@@ -239,8 +242,6 @@ def home_page(request):
     context={
         'all_churches': Church.objects.all(),
         'all_users':User.objects.all(),
-        'all_user_messages': UserMessage.objects.all(),
-        'all_church_messages': ChurchMessage.objects.all(),
     }
     return render(request, "home_page.html", context)
 
