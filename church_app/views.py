@@ -104,7 +104,9 @@ def create_user_contact(request):
         request.session['user_facebook']=f"{request.POST['user_facebook']}"
         request.session['user_instagram']=f"{request.POST['user_instagram']}"
         request.session['user_twitter']=f"{request.POST['user_twitter']}"
-        request.session['family']=f"{request.POST['family']}"
+        request.session['adults']=f"{request.POST['adults']}"
+        request.session['teens']=f"{request.POST['teens']}"
+        request.session['kids']=f"{request.POST['kids']}"
         request.session['user_phone']=f"{request.POST['user_phone']}"
         return redirect('/user_church')
 
@@ -123,7 +125,7 @@ def user_info_other(request):
     return render(request, "user_reg/user_info_other.html")
 
 def finish_user(request):
-    new_user=User.objects.create(first_name=request.session['first_name'], last_name=request.session['last_name'], email=request.session['user_email'], password=request.session['password'], user_address=request.session['user_address'],user_city=request.session['user_city'],user_state=request.session['user_state'], user_email=request.session['user_email'], user_facebook=request.session['user_facebook'], user_instagram=request.session['user_instagram'], user_twitter=request.session['user_twitter'], family=request.session['family'], user_phone=request.session['user_phone'], denomination=request.session['denomination'], church_size=request.session['church_size'], student_programs=request.session['student_programs'], small_groups=request.session['small_groups'], user_info_other=request.POST['user_info_other'])
+    new_user=User.objects.create(first_name=request.session['first_name'], last_name=request.session['last_name'], email=request.session['user_email'], password=request.session['password'], user_address=request.session['user_address'],user_city=request.session['user_city'],user_state=request.session['user_state'], user_email=request.session['user_email'], user_facebook=request.session['user_facebook'], user_instagram=request.session['user_instagram'], adults=request.session['adults'], teens=request.session['teens'], kids=request.session['kids'], user_phone=request.session['user_phone'], denomination=request.session['denomination'], church_size=request.session['church_size'], student_programs=request.session['student_programs'], small_groups=request.session['small_groups'], user_info_other=request.POST['user_info_other'])
     request.session['user_id']=new_user.id
     return redirect("/user_pic")
 
@@ -212,19 +214,20 @@ def logout(request):
     return redirect('/')
 
 def add_message(request):
-    user_obj=null
-    church_obj=null
-    if request.session.UserType==2:
-        church_obj=Church.objects.get(id=request.sesssion.church_id)
-    elif request.session.UserType==1:
-        user_obj=User.objects.get(id=request.session.user_id)
-    message = Message.objects.create(message=request.POST['message'], church=church_obj, user=user_obj, user_type=null)
-    return redirect('/home_page')
+    # user_obj=null
+    # church_obj=null
+    # if request.session.UserType==2:
+    #     church_obj=Church.objects.get(id=request.sesssion.church_id)
+    # elif request.session.UserType==1:
+    #     user_obj=User.objects.get(id=request.session.user_id)
+    user=User.objects.get(id=request.session['user_id'])
+    message = UserMessage.objects.create(message=request.POST['message'], user=user)
+    return redirect('/user_home_page')
 
-# def delete(request, message_id):
-#     message=Message.objects.get(id=message_id)
-#     message.delete()
-#     return redirect('/user_home_page')
+def delete(request, message_id):
+    message=UserMessage.objects.get(id=message_id)
+    message.delete()
+    return redirect('/user_home_page')
 
 def delete_church(request, church_id):
     church=Church.objects.get(id=church_id)
@@ -242,6 +245,8 @@ def home_page(request):
     context={
         'all_churches': Church.objects.all(),
         'all_users':User.objects.all(),
+        'all_messages':UserMessage.objects.all(),
+        'all_comments':UserComments.objects.all()
     }
     return render(request, "home_page.html", context)
 
@@ -289,6 +294,11 @@ def user_add_comment(request, message_id):
     user = User.objects.get(id=request.session['user_id'])
     message = UserMessage.objects.get(id=message_id)
     comment = UserComments.objects.create(comment=request.POST['comment'], user=user, wall_message=message)
+    return redirect('/user_home_page')
+
+def delete_comment(request, comment_id):
+    comment=UserComments.objects.get(id=comment_id)
+    comment.delete()
     return redirect('/user_home_page')
 
 def user_profile(request, user_id):

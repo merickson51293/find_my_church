@@ -1,10 +1,10 @@
 from django.db import models
 import re, bcrypt
-from enum import Enum
+# from enum import Enum
 
-class UserType(Enum):
-    User = 1
-    Church = 2
+# class UserType(Enum):
+#     User = 1
+#     Church = 2
 
 class UserManager(models.Manager):
     def validator(self, postdata):
@@ -133,11 +133,9 @@ class Pastor(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-class Message(models.Model):
+class UserMessage(models.Model):
     message=models.TextField()
-    church= models.ForeignKey(Church, related_name='church_message', on_delete=models.CASCADE, null=True)
-    user= models.ForeignKey(User, related_name='user_message', on_delete=models.CASCADE, null=True)
-    user_type= models.IntegerField()
+    user= models.ForeignKey(User, related_name='message', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
@@ -150,13 +148,13 @@ class DirectMessages(models.Model):
 class ChurchComments(models.Model):
     comment=models.CharField(max_length=255)
     church= models.ForeignKey(Church, related_name='church_comment', on_delete=models.CASCADE)
-    wall_message= models.ForeignKey(Message, related_name='church_post_comments', on_delete=models.CASCADE)
+    wall_message= models.ForeignKey(UserMessage, related_name='church_post_comments', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
 class UserComments(models.Model):
     comment=models.CharField(max_length=255)
     user= models.ForeignKey(User, related_name='user_comment', on_delete=models.CASCADE)
-    wall_message= models.ForeignKey(Message, related_name='user_post_comments', on_delete=models.CASCADE)
+    wall_message= models.ForeignKey(UserMessage, related_name='user_post_comments', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

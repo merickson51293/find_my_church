@@ -21,45 +21,39 @@
         <h3>The Wall</h3>
         <form action="/add_message" method="post">
             {% csrf_token %}
-        <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
-        <input id="submit" type="submit" value="Add Message">
+            <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
+            <input id="submit" type="submit" value="Add Message">
         </form>
-        {% for messages in all_user_messages %}
+        {% for messages in all_messages %}
         <div id="messages">
             <h3>{{messages.message}}</h3>
             <h5>- <a href="/user_profile/{{messages.user.id}}">{{messages.user.first_name}} {{messages.user.last_name}}</a></h5>
-            <!-- <a href="/delete/{{messages.id}}">Delete</a> -->
-            {% endfor %}
-        <!-- <div id="messages">
-                <h3>{{messages.message}}</h3>
-                <h5>- <a href="/user_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5> -->
-                <!-- <a href="/delete/{{messages.id}}">Delete</a> -->
-        <!-- </div> -->
-        <!-- <div id="comment">
-            {% for comment in messages.church_post_comments.all %}
-            <p>{{comment.comment}}</p>
-            <p>Commented by: <a href="/church_profile/{{comment.church.id}}">{{comment.church.church_name}}</a></p>
-            {% endfor %}
+            {% if messages.user.id == request.session.user_id %}
+                <a href="/delete/{{messages.id}}">Delete</a>
+            {% endif %}
+        <div id="comment">
             {% for comment in messages.user_post_comments.all %}
-            <p>{{comment.comment}}</p>
-            <p>Commented by: <a href="/user_profile/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a></p>
-           </div>
+                <p>{{comment.comment}}</p>
+                <p>Commented by: <a href="/user_profile/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a></p>
+                {% if comment.user.id == request.session.user_id %}
+                <a href="/delete_comment/{{comment.id}}">Delete</a>
+                {% endif %}
+                {% endfor %}
             <form action="/user_add_comment/{{messages.id}}" method="post">
                 {% csrf_token %}
-            <p>Comment: <input type="text" name="comment"></p>
-            <input type="submit" value="Comment">
-            </form> -->
-            
-        <!-- {% if messages.church.id == request.session.church_id %}
-        <a href="/delete/{{messages.id}}">Delete</a>
-        {% endif %} -->
-        <!-- {% endfor %} -->
+                <p>Comment: <input type="text" name="comment"></p>
+                <input type="submit" value="Comment">
+            </form>
+        </div>
+        {% endfor %}
+        
+       
+
         <!--add messages from followed churches and friends-->
         <!--liking capabilities and commenting capabilities-->
         <!--direct messaging capabilities to each person-->
         <!--person/church name is clickable to their specific profile-->
     </div>
-<!-- </div> -->
 {% endblock %}
 </body>
 </html>
