@@ -10,14 +10,6 @@
     <link rel="stylesheet" href="{% static 'home_page.css' %}">
 </head>
 <body>
-    <div id="top">
-        <h1>Community Church Finder</h1>
-        <img id="nav_icons" src="{% static '/bell.png' %}" alt="notifications">
-        <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
-        <a class="profile" href="/user_profile/{{request.session.user_id}}"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
-        <a class="home" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
-        <a href="/logout">Logout</a>
-    </div>
     <h3>Local Area Churches</h3>
     {% for church in area_church %}
     <h2><a href="/church_profile/{{church.id}}">{{church.church_name}}</a></h2>

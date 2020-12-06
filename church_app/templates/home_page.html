@@ -17,13 +17,11 @@
     </div>
     <div id="top_right">
         <h3>The Wall</h3>
-
         <form action="/add_message" method="post">
             {% csrf_token %}
             <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
             <input id="submit" type="submit" value="Add Message">
         </form>
-
         {% for messages in all_messages %}
         <div id="messages">
             <h3>{{messages.message}}</h3>
