@@ -224,6 +224,11 @@ def add_message(request):
     message = UserMessage.objects.create(message=request.POST['message'], user=user)
     return redirect('/user_home_page')
 
+def church_add_message(request):
+    church=Church.objects.get(id=request.session['church_id'])
+    message = ChurchMessage.objects.create(message=request.POST['message'], church=church)
+    return redirect('/church_home_page')
+
 def delete(request, message_id):
     message=UserMessage.objects.get(id=message_id)
     message.delete()
@@ -238,7 +243,9 @@ def church_home_page(request):
     context={
         'all_churches': Church.objects.all(),
         'all_users': User.objects.all(),
-        'all_messages': UserMessage.objects.all(),
+        'all_messages': ChurchMessage.objects.all(),
+        'user_message': UserMessage.objects.all(),
+        'all_comments': ChurchComments.objects.all(),
     }
     return render(request, "church_home_page.html", context)
 
@@ -287,7 +294,7 @@ def edit(request, church_id):
 
 def church_add_comment(request, message_id):
     church = Church.objects.get(id=request.session['church_id'])
-    message = UserMessage.objects.get(id=message_id)
+    message = ChurchMessage.objects.get(id=message_id)
     comment = ChurchComments.objects.create(comment=request.POST['comment'], church=church, wall_message=message)
     return redirect('/church_home_page')
 
