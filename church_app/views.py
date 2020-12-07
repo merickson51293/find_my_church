@@ -234,12 +234,13 @@ def delete_church(request, church_id):
     church.delete()
     return redirect('/user_home_page')
 
-# def church_home_page(request):
-#     context={
-#         'all_churches': Church.objects.all(),
-#         'all_messages': Message.objects.all(),
-#     }
-#     return render(request, "church_home_page.html", context)
+def church_home_page(request):
+    context={
+        'all_churches': Church.objects.all(),
+        'all_users': User.objects.all(),
+        'all_messages': UserMessage.objects.all(),
+    }
+    return render(request, "church_home_page.html", context)
 
 def home_page(request):
     context={
@@ -265,11 +266,11 @@ def edit_user(request, user_id):
 def edit(request, church_id):
     edit = Church.objects.get(id=church_id)
     edit.address= request.POST['address']
-    edit.city_state= request.POST['city_state']
+    edit.church_city= request.POST['church_city']
+    edit.church_state= request.POST['church_state']
     edit.website= request.POST['website']
     edit.facebook= request.POST['facebook']
     edit.instagram= request.POST['instagram']
-    edit.twitter= request.POST['twitter']
     edit.church_email= request.POST['church_email']
     edit.church_phone= request.POST['church_phone']
     edit.denomination= request.POST['denomination']

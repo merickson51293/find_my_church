@@ -44,7 +44,7 @@ urlpatterns = [
     path('delete/<int:message_id>', views.delete),
     path('delete_comment/<int:comment_id>', views.delete_comment),
     path('delete_church/<int:church_id>', views.delete_church),
-    path('church_home_page', views.home_page),
+    path('church_home_page', views.church_home_page),
     path('user_home_page', views.home_page),
     path('user_profile/<int:user_id>', views.user_profile),
     path('upload', views.image_upload_view),

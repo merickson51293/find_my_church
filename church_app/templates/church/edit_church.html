@@ -11,11 +11,11 @@
     <form action="/edit/{{request.session.church_id}}" method="post">
         {% csrf_token %}
     Address: <input type="text" name="address" value="{{one_church.address}}"></br>
-    City and State: <input type="text" name="city_state" value="{{one_church.city_state}}"></br>
+    City: <input type="text" name="church_city" value="{{one_church.church_city}}"></br>
+    State: <input type="text" name="church_state" value="{{one_church.church_state}}"></br>
     Website: <input type="text" name="website" value="{{one_church.website}}"></br>
     Facebook: <input type="text" name="facebook" value="{{one_church.facebook}}"></br>
     Instagram: <input type="text" name="instagram" value="{{one_church.instagram}}"></br>
-    Twitter: <input type="text" name="twitter" value="{{one_church.twitter}}"></br>
     Church Email: <input type="text" name="church_email" value="{{one_church.church_email}}"></br>
     Church Phone Number: <input type="text" name="church_phone" value="{{one_church.church_phone}}"></br>
     Denomination: <input type="text" name="denomination" value="{{one_church.denomination}}"></br>
