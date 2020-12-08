@@ -76,7 +76,7 @@ class ChurchManager(models.Manager):
         email_check=re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         errors={}
         if len(postdata['church_name'])<5:
-            errors['church_name']="First name must be longer than 5 characters!"
+            errors['church_name']="Church name must be longer than 5 characters!"
         if len(postdata['admin_name'])<5:
             errors['admin_name']="Admin name must be longer than 5 characters!"
         if not email_check.match(postdata['admin_email']):
@@ -145,10 +145,9 @@ class ChurchMessage(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-class DirectMessages(models.Model):
-    dm=models.TextField()
-    church=models.ForeignKey(Church, related_name='user_dm', on_delete=models.CASCADE)
-    user=models.ForeignKey(User, related_name='church_dm', on_delete=models.CASCADE)
+class IndividualMessages(models.Model):
+    im=models.TextField()
+    user=models.ForeignKey(User, related_name='user_message', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 

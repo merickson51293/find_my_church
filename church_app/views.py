@@ -4,7 +4,7 @@ from django.contrib import messages
 import bcrypt
 from .models import *
 from .forms import *
-
+from directmessages.apps import Inbox
 
 def index(request):
     return render(request, "index.html")
@@ -223,6 +223,10 @@ def add_message(request):
     user=User.objects.get(id=request.session['user_id'])
     message = UserMessage.objects.create(message=request.POST['message'], user=user)
     return redirect('/user_home_page')
+
+def add_individual_message(request):
+    user=User.objects.get(id=request.session['user_id'])
+    message = IndividualMessage.objects.creat(message=request.POST['message'], user=user,)
 
 def church_add_message(request):
     church=Church.objects.get(id=request.session['church_id'])

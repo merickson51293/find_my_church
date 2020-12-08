@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include("church_app.urls"))
+    path('', include("church_app.urls")),
 ]
 
 if settings.DEBUG:
