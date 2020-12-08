@@ -226,7 +226,8 @@ def add_message(request):
 
 def add_individual_message(request):
     user=User.objects.get(id=request.session['user_id'])
-    message = IndividualMessage.objects.creat(message=request.POST['message'], user=user,)
+    im = IndividualMessages.objects.create(im=request.POST['im'], user=user,)
+    return redirect('/user_profile')
 
 def church_add_message(request):
     church=Church.objects.get(id=request.session['church_id'])
