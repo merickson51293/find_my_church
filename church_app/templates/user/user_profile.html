@@ -40,13 +40,15 @@
                 <a href="/edit_user/{{one_user.id}}">Edit Your User</a>
                 {% endif %}
             </div>
+        <!-- {% if request.session.user_id != one_user.id %} -->
         <div id="user_wall">
             <h3>Leave a message for {{one_user.first_name}} {{one_user.last_name}}!</h3>
-            <form action="/add_individual_message" method="post">
+            <form action="/add_direct_message" method="post">
                 {% csrf_token %}
                 <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
                 <input id="submit" type="submit" value="Add Message">
             </form>
+            
     </div>
     {% endblock %}
 </body>

@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Info Input</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+    <link rel="stylesheet" href="{% static 'church_reg3.css' %}">
 </head>
 <body>
+    <div id="wrapper" style="background-image: url({% static '/church.jpg' %}">
+        <div id="top">
     <form action="/create_church_info_other" method="POST">
         {% csrf_token %}
-        <p>Any other important information that a prospective member might want to know!</p><textarea name="other" cols="30" rows="10"></textarea>
+        <h2>Any other important information that a prospective member might want to know!</h2><textarea name="other" cols="70" rows="10"></textarea>
     </br>
-        <input type="submit" value="Finish">
+        <input id="button" type="submit" value="Finish">
     </form>
-    <a href="/church_beliefs"><button>Back</button></a>
+    <a href="/church_beliefs"><button id="button1">Back</button></a>
+</div>
+</div>
 </body>
 </html>

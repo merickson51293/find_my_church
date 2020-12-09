@@ -1,0 +1,41 @@
+h1{
+    text-align: center;
+}
+
+div#top{
+    border: black 2px solid;
+    text-align: center;
+    display: inline-block;
+    border-collapse: collapse;
+    padding: 25px;
+    margin-left: 25%;
+    margin-top: 12%;
+    background-color: white;
+}
+
+#button{
+    font-size: 25px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#button:hover{
+    background-color: grey;
+}
+
+#button1{
+    font-size: 18px;
+    border-radius: 5px;
+    display: inline-block;
+    
+}
+
+#button1:hover{
+    background-color: grey;
+}
+
+#wrapper{
+    height: 1000px;
+}

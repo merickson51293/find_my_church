@@ -4,11 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Info Input</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+    <link rel="stylesheet" href="{% static 'church_reg.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </head>
 <body>
+    <div id="wrapper"style="background-image: url({% static '/church.jpg' %}">
+        <div id="top">
     <h2>Please tell us about your pastoral staff. Include as many pastors as you believe would be helpful to prospective members.</h2>
     <form action="/create_pastor" method="POST">
         {% csrf_token %}
@@ -17,13 +19,14 @@
         <p><b>Pastor Email: </b><input type="text" name="pastor_email"></p>
         <p><b>Pastor Phone Number: </b><input type="text" name="pastor_phone"></p>
         <p><b>Pastor Social Media: </b><input type="text" name="pastor_social"></p>
-        <input type="submit" value="Add Pastor">
+        <input id="button2" type="submit" value="Add Pastor">
     </form>
     {% for pastor in church_pastors %}
-    <p>{{pastor.pastor_name}}</p>
-    <p>{{pastor.pastor_title}}</p>
+    <h3>{{pastor.pastor_name}} - {{pastor.pastor_title}}</h3>
     {% endfor %}
-    <a href="/church_home_page">Finish!</a>
-    <a href="/church_beliefs"><button>Back</button></a>
+    <a href="/church_home_page"><button id="button">Finish</button></a></br>
+    <a href="/church_beliefs"><button id="button1">Back</button></a>
+</div>
+</div>
 </body>
 </html>

@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Info Input</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+    <link rel="stylesheet" href="{% static 'church_reg1.css' %}">
 </head>
 <body>
-    <h2>Please tell us about {{request.session.church_name}}'s Location and Contact Information</h2>
+    <div id="wrapper" style="background-image: url({% static '/church.jpg' %}">
+    <div id="top"><h2>Please tell us about {{request.session.church_name}}'s Location and Contact Information</h2>
     <form action="/create_church_contact" method="post">
         {% csrf_token %}
         <p>City: <input type="text" name="church_city"></p>
         <p>State: <input type="text" name="church_state"></p>
         <p>Address: <input type="text" name="address"></p>
-        <p>Website: <input type="text" name="website"></p>
-        <p>Social Media</p>
-        <p>Facebook: <input type="text" name="facebook"></p>
-        <p>Instagram: <input type="text" name="instagram"></p>
         <p>Email: <input type="email" name="church_email"></p>
         <p>Phone Number: <input type="text" name="church_phone"></p>
-        <input type="submit" value="Next">
+        <p>Website: <input type="text" name="website"></p>
+        <p>Facebook: <input type="text" name="facebook"></p>
+        <p>Instagram: <input type="text" name="instagram"></p>
+        <input id="button"type="submit" value="Next">
     </form>
-    <a href="/church_info"><button>Back</button></a>
+    <a href="/church_info"><button id="button1">Back</button></a>
+</div>
+</div>
 </body>
 </html>

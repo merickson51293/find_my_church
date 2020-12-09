@@ -1,0 +1,49 @@
+h1{
+    text-align: center;
+}
+
+div#top{
+    border: black 2px solid;
+    text-align: center;
+    display: inline-block;
+    border-collapse: collapse;
+    padding: 25px;
+    margin-left: 15%;
+    margin-top: 15%;
+    background-color: white;
+}
+
+#button{
+    font-size: 25px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#button:hover{
+    background-color: grey;
+}
+
+#button1{
+    font-size: 18px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#button1:hover{
+    background-color: grey;
+}
+
+#wrapper{
+    height: 1000px;
+}
+
+#button2{
+    font-size: 18px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#button2:hover{
+    background-color: grey;
+}

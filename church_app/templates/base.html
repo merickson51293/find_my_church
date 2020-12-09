@@ -18,11 +18,22 @@
                 </form>
               </div>
             
+            {% if request.session.user_id is none %}
+            <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
+            <a href="/church_profile/{{request.session.church_id}}"><img id="nav_icons" src="{% static '/church.png' %}" alt="church"></a>
+            <a href="/local_people"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
+            <a class="profile" href="/church_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
+            <a href="/logout">Logout</a>
+            {% elif request.session.church_id is none %}
             <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
             <a href="/area_churches"><img id="nav_icons" src="{% static '/church.png' %}" alt="church"></a>
             <a href="/user_profile/{{request.session.user_id}}"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
             <a class="profile" href="/user_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>
             <a href="/logout">Logout</a>
+            {% else %} 
+            <p>User: {{request.session.user_id}}</p>
+            <p>Church: {{request.session.church_id}}</p>
+            {% endif %}
         </div>
         {% block content %}{% endblock %}
         </div>

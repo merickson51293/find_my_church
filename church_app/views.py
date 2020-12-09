@@ -4,7 +4,7 @@ from django.contrib import messages
 import bcrypt
 from .models import *
 from .forms import *
-from directmessages.apps import Inbox
+from .utils import *
 
 def index(request):
     return render(request, "index.html")
@@ -203,9 +203,15 @@ def church_main(request):
     return render(request, "church/church_main.html", context)
 
 def church_profile(request, church_id):
+    churchobj=Church.objects.get(id=church_id)
+    if isloggedinuser(request.session):
+        userobj=User.objects.get(id=request.session.user_id)
+        dm = DirectMessages.objects.get(user=userobj, church=churchobj)
+    else:
+        dm = DirectMessages.objects.get(church=churchobj)
     context={
-        'one_church': Church.objects.get(id=church_id),
-        'all_churches': Church.objects.all(),
+        'one_church': churchobj,
+        'dm': dm
     }
     return render(request, "church/church_profile.html", context)
 
@@ -224,10 +230,16 @@ def add_message(request):
     message = UserMessage.objects.create(message=request.POST['message'], user=user)
     return redirect('/user_home_page')
 
-def add_individual_message(request):
-    user=User.objects.get(id=request.session['user_id'])
-    im = IndividualMessages.objects.create(im=request.POST['im'], user=user,)
-    return redirect('/user_profile')
+def add_direct_message(request):
+    user=User.objects.get(id=request.POST['user_id'])
+    church=Church.objects.get(id=request.POST['church_id'])
+    dm = DirectMessages.objects.create(dm=request.POST['dm'], user=user, church=church)
+    if isloggedinuser(request.session):
+        return redirect('/church_profile')
+    elif isloggedinchurch(request.session):
+        return redirect('/user_profile')
+    else:
+        return redirect('/')
 
 def church_add_message(request):
     church=Church.objects.get(id=request.session['church_id'])
@@ -315,8 +327,15 @@ def delete_comment(request, comment_id):
     return redirect('/user_home_page')
 
 def user_profile(request, user_id):
+    userobj=User.objects.get(id=user_id)
+    if isloggedinchurch(request.session):
+        churchobj=Church.objects.get(id=request.session.church_id)
+        dm = DirectMessages.objects.get(user=userobj, church=churchobj)
+    else:
+        dm = DirectMessages.objects.get(user=userobj)
     context={
-        'one_user': User.objects.get(id=user_id)
+        'one_user': userobj,
+        'dm': dm
     }
     return render(request, "user/user_profile.html", context)
 

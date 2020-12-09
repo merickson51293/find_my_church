@@ -145,9 +145,10 @@ class ChurchMessage(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-class IndividualMessages(models.Model):
-    im=models.TextField()
-    user=models.ForeignKey(User, related_name='user_message', on_delete=models.CASCADE)
+class DirectMessages(models.Model):
+    dm=models.TextField()
+    user=models.ForeignKey(User, related_name='church_dm', on_delete=models.CASCADE)
+    church=models.ForeignKey(Church, related_name='user_dm', on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 

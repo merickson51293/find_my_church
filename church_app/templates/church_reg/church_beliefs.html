@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Info Input</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'church_info.css' %}">
+    <link rel="stylesheet" href="{% static 'church_reg2.css' %}">
 </head>
 <body>
+    <div id="wrapper" style="background-image: url({% static '/church.jpg' %}">
+        <div id="top">
     <h2>Please tell us about {{request.session.church_name}}'s Denomination, Values/Beliefs and Breakdown of Members</h2>
     <form action="/create_church_beliefs" method="POST">
         {% csrf_token %}
         <p>Denomination: <input type="text" name="denomination"></p>
-        <p>Values and Beliefs</p><textarea name="values" cols="30" rows="10"></textarea>
+        <p>Link to Values and Beliefs: <input type="text" name="values"></p>
         <p>Size of Church: <input type="number" name="size"></p>
-        <p>Breakdown of age groups</p>
+        <p><b>Breakdown of age groups</b></p>
         <p>Percentage of age 0-10 <input type="number" name="youngest"></p>
         <p>Percentage of age 10-20 <input type="number" name="younger"></p>
         <p>Percentage of age 20-30 <input type="number" name="young"></p>
         <p>Percentage of age 30-50 <input type="number" name="old"></p>
         <p>Percentage of age 50+ <input type="number" name="oldest"></p>
-        <input type="submit" value="Next">
+        <input id="button" type="submit" value="Next">
     </form>
-    <a href="/church_contact"><button>Back</button></a>
+    <a href="/church_contact"><button id="button1">Back</button></a>
+</div>
+</div>
 </body>
 </html>
