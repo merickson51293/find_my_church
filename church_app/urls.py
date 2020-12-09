@@ -51,5 +51,5 @@ urlpatterns = [
     path('upload', views.image_upload_view),
     path('local_people', views.local_people),
     path('area_churches', views.area_churches),
-    path('add_individual_message', views.add_individual_message),
+    path('add_direct_message', views.add_direct_message),
 ] 
