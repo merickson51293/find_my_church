@@ -10,10 +10,10 @@
 </head>
 <body>
     {% block content %}
-    <h3>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h3>
+    <h2>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h2>
     <div id="top_left">
-        <h3><a href="/area_churches">Possible Churches in your area</a></h3>
-        <h3><a href="/local_people">People in your area</a></h3> 
+        <h3><a id="none" href="/area_churches">Possible Churches in your area</a></h3>
+        <h3><a id="none" href="/local_people">People in your area</a></h3> 
     </div>
     <div id="top_right">
         <h3>The Wall</h3>
@@ -24,15 +24,12 @@
         </form>
         {% for messages in all_messages %}
         <div id="messages">
+            <h4><a id="none" href="/user_profile/{{messages.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{messages.user.first_name}} {{messages.user.last_name}}</a>{% if messages.user.id == request.session.user_id %} -<a href="/delete/{{messages.id}}">  Delete </a>-</h4>{% endif %}
             <h3>{{messages.message}}</h3>
-            <h5>- <a href="/user_profile/{{messages.user.id}}">{{messages.user.first_name}} {{messages.user.last_name}}</a></h5>
-            {% if messages.user.id == request.session.user_id %}
-                <a href="/delete/{{messages.id}}">Delete</a>
-            {% endif %}
         <div id="comment">
             {% for comment in messages.user_post_comments.all %}
                 <p>{{comment.comment}}</p>
-                <p>Commented by: <a href="/user_profile/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a></p>
+                <p>Commented by: <a id="none" href="/user_profile/{{comment.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{comment.user.first_name}} {{comment.user.last_name}}</a></p>
                 {% if comment.user.id == request.session.user_id %}
                 <a href="/delete_comment/{{comment.id}}">Delete</a>
                 {% endif %}

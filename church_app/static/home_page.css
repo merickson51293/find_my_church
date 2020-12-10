@@ -1,8 +1,7 @@
-div#wrapper{
-    margin: 5px;
-}
+
 
 h1{
+    margin-left: 2%;
     display: inline-block;
     width: 30%;
     margin-right: 10%;
@@ -10,10 +9,22 @@ h1{
 
 div#top{
     border-bottom: black 2px solid;
+    background-color: #efefef
 }
 
-h3{
+#none{
+    text-decoration: none;
+    color: black;
+}
+
+#smallpic{
+    width: 25px;
+}
+
+h2{
     text-align: center;
+    margin-top: 2%;
+    margin-bottom: 3%;
 }
 
 a.profile{
@@ -68,3 +79,4 @@ div#top_right{
     padding: 10px;
     width: 30%;
 }
+
