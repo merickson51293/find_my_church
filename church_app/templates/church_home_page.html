@@ -11,60 +11,70 @@
 <body>
 <div id="wrapper">
     {% block content %}
-    <p>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</p>
+    <h2>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h2>
+    <h2><a href="/local_people" style=color:black>Possible Users In Your Area</a></h2>
     <div id="top_left">
+        <div id="wall">
         <h3>Communicate with other churches</h3>
         <form action="/church_add_message" method="post">
             {% csrf_token %}
             <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
             <input id="submit" type="submit" value="Add Message">
         </form>
+        </div>
         {% for messages in all_messages %}
         <div id="messages">
+            <h3><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h3>
             <h3>{{messages.message}}</h3>
-            <h5>- <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h5>
             {% if messages.user.id == request.session.user_id %}
                 <a href="/delete/{{messages.id}}">Delete</a>
             {% endif %}
-        <div id="comment">
-            {% for comment in messages.church_post_comments.all %}
-                <p>{{comment.comment}}</p>
-                <p>Commented by: <a href="/church_profile/{{comment.church.id}}">{{comment.church.church_name}}</a></p>
-                {% if comment.church.id == request.session.church_id %}
-                <a href="/delete_comment/{{comment.id}}">Delete</a>
-                {% endif %}
-                {% endfor %}
-            <form action="/church_add_comment/{{messages.id}}" method="post">
-                {% csrf_token %}
-                <p>Comment: <input type="text" name="comment"></p>
-                <input type="submit" value="Comment">
-            </form>
+            <div id="comment">
+                {% for comment in messages.church_post_comments.all %}
+                <div id="comment1">
+                <p><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/church_profile/{{comment.church.id}}">{{comment.church.church_name}}</a></p>
+                    <p>{{comment.comment}}</p>
+                    
+                    {% if comment.church.id == request.session.church_id %}
+                    <a href="/delete_comment/{{comment.id}}">Delete</a>
+                    {% endif %}
+                </div>
+                    {% endfor %}
+                <form action="/church_add_comment/{{messages.id}}" method="post">
+                    {% csrf_token %}
+                    <p>Comment: <input type="text" name="comment"></p>
+                    <input type="submit" value="Comment">
+                </form>
+            </div>
         </div>
         {% endfor %}
-    </div>
-    </div>
+        
+    
 </div>
     <div id="top_right">
-        <h2><a href="/local_people">Possible Users In Your Area</a></h2>
-        <h2>User Messages</h2>
+        
+        <div id="wall"><h2>User Messages</h2></div>
         {% for messages in user_message %}
         <div id="messages">
+            <h3><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/user_profile/{{messages.user.id}}">{{messages.user.first_name}} {{messages.user.last_name}}</a></h3>
                 <h3>"{{messages.message}}"</h3>
                 <h5>{{messages.user.created_at}}</h5>
-                <h5>- <a href="/user_profile/{{messages.user.id}}">{{messages.user.first_name}} {{messages.user.last_name}}</a></h5>
-        </div>
         <div id="comment">
-            
             {% for comment in messages.user_post_comments.all %}
+            <div id="comment1">
+                <p><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/user_profile/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a></p>
+
             <p>{{comment.comment}}</p>
-            <p>Commented by: <a href="/user_profile/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a></p>
+        </div>
             {% endfor %}
+        </div>
+        </div>
         {% endfor %}
         <!--add messages from followed churches and friends-->
         <!--liking capabilities and commenting capabilities-->
         <!--direct messaging capabilities to each person-->
     </div>
-  
+    
     {% endblock %}
 </div>
 </body>

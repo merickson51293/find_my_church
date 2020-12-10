@@ -56,9 +56,19 @@ div#top > a{
 }
 
 div#top_left{
+    text-align: left;
+    margin-left: 10%;
+    width: 29%;
+    display: inline-block;
+    border-collapse: collapse;
+    vertical-align: top;
+
+}
+
+div#top_left1{
     text-align: center;
     margin-left: 10%;
-    width: 30%;
+    width: 29%;
     display: inline-block;
     border-collapse: collapse;
     vertical-align: top;
@@ -78,7 +88,7 @@ div#top_right{
     display: inline-block;
     margin-left: 18%;
     
-    width: 30%;
+    width: 29%;
     padding-left: 10px;
 }
 

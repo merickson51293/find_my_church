@@ -11,7 +11,7 @@
 <body>
     {% block content %}
     <h2>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h2>
-    <div id="top_left">
+    <div id="top_left1">
         <h3><a id="none" href="/area_churches">Possible Churches in your area</a></h3>
         <h3><a id="none" href="/local_people">People in your area</a></h3> 
     </div>
@@ -31,8 +31,8 @@
         <div id="comment">
             {% for comment in messages.user_post_comments.all %}
             <div id="comment1">
-            <p><a id="none" href="/user_profile/{{comment.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{comment.user.first_name}} {{comment.user.last_name}}</a> - {% if comment.user.id == request.session.user_id %}
-                <a href="/delete_comment/{{comment.id}}">Delete</a> -
+            <p><a id="none" href="/user_profile/{{comment.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{comment.user.first_name}} {{comment.user.last_name}}</a>{% if comment.user.id == request.session.user_id %}
+                <a href="/delete_comment/{{comment.id}}">Delete</a>
                 {% endif %}</p>
                 <p>{{comment.comment}}</p>
                 
