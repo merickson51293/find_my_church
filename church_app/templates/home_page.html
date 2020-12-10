@@ -16,23 +16,28 @@
         <h3><a id="none" href="/local_people">People in your area</a></h3> 
     </div>
     <div id="top_right">
-        <h3>The Wall</h3>
+        <div id="wall">
+        <h3>Communicate with other users!</h3>
         <form action="/add_message" method="post">
             {% csrf_token %}
-            <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
-            <input id="submit" type="submit" value="Add Message">
+            <p id="add_message"><textarea type="text" name="message" cols="50" rows="5"></textarea></p>
+            <input id="submit" type="submit" value="Send Message">
         </form>
+    </div>
         {% for messages in all_messages %}
         <div id="messages">
             <h4><a id="none" href="/user_profile/{{messages.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{messages.user.first_name}} {{messages.user.last_name}}</a>{% if messages.user.id == request.session.user_id %} -<a href="/delete/{{messages.id}}">  Delete </a>-</h4>{% endif %}
             <h3>{{messages.message}}</h3>
         <div id="comment">
             {% for comment in messages.user_post_comments.all %}
+            <div id="comment1">
+            <p><a id="none" href="/user_profile/{{comment.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{comment.user.first_name}} {{comment.user.last_name}}</a> - {% if comment.user.id == request.session.user_id %}
+                <a href="/delete_comment/{{comment.id}}">Delete</a> -
+                {% endif %}</p>
                 <p>{{comment.comment}}</p>
-                <p>Commented by: <a id="none" href="/user_profile/{{comment.user.id}}"><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> {{comment.user.first_name}} {{comment.user.last_name}}</a></p>
-                {% if comment.user.id == request.session.user_id %}
-                <a href="/delete_comment/{{comment.id}}">Delete</a>
-                {% endif %}
+                
+                
+            </div>
                 {% endfor %}
             <form action="/user_add_comment/{{messages.id}}" method="post">
                 {% csrf_token %}
@@ -40,15 +45,11 @@
                 <input type="submit" value="Comment">
             </form>
         </div>
+    </div>
         {% endfor %}
-        
-       
-
         <!--add messages from followed churches and friends-->
         <!--liking capabilities and commenting capabilities-->
-        <!--direct messaging capabilities to each person-->
-        <!--person/church name is clickable to their specific profile-->
-    </div>
+    
 {% endblock %}
 </body>
 </html>

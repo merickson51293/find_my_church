@@ -64,6 +64,8 @@ div#top_left{
     vertical-align: top;
     border: 2px solid black;
     padding: 10px;
+    background-color: #efefef;
+
 }
 
 p#add_message{
@@ -72,11 +74,36 @@ p#add_message{
 }
 
 div#top_right{
-    text-align: center;
+    text-align: left;
     display: inline-block;
     margin-left: 18%;
-    border: 2px black solid;
-    padding: 10px;
+    
     width: 30%;
+    padding-left: 10px;
 }
 
+#wall{
+    border: 2px solid black;
+    padding-bottom: 15px;
+    text-align: center;
+    background-color: #efefef;
+
+}
+
+#messages{
+    border: 2px solid black;
+    margin-top: 5px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    background-color: #efefef;
+}
+
+#comment1{
+    background-color: #a9a9a9;
+    padding-left: 15px;
+    border-radius: 5px;
+    width: 90%;
+    margin-top: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
