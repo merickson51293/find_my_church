@@ -1,5 +1,5 @@
 #wrapper{
-    height: 1000px;
+    height: 925px;
 }
 
 div#top{
@@ -23,15 +23,29 @@ div#info{
     display: inline-block;
     padding: 25px;
     padding-top: 10px;
-    margin-left: 27%;
+    margin-left: 30%;
+    background-color: white;
 }
 
 #button{
-    font-size: 18px;
+    margin-top: 20px;
+    font-size: 25px;
     border-radius: 5px;
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 #button:hover{
+    background-color: grey;
+}
+
+#button1{
+    font-size: 18px;
+    border-radius: 5px;
+    display: inline-block;
+
+}
+
+#button1:hover{
     background-color: grey;
 }

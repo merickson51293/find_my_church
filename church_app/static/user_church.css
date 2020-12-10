@@ -1,10 +1,14 @@
+#wrapper{
+    height: 925px;
+}
+
 div#top{
     border-bottom: black 2px solid;
 }
 
 h1{
     display: inline-block;
-    margin-right: 53%;
+    margin-right: 58%;
 }
 
 div#top > h3{
@@ -21,6 +25,7 @@ div#info{
     padding: 25px;
     padding-top: 10px;
     margin-left: 32%;
+    background-color: white;
 }
 
 #button{

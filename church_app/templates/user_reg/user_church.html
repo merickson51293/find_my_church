@@ -12,6 +12,7 @@
         <h1>Community Church Finder</h1>
         <h3>Welcome {{request.session.first_name}} {{request.session.last_name}}</h3>
     </div>
+    <div id="wrapper" style="background-image: url({% static '/user_reg.jpg' %}">
     <div id="info">
     <h2>Please tell us what you are looking for in a church.</h2>
     <form action="/create_user_church" method="post">
@@ -35,6 +36,7 @@
         <input id="button" type="submit" value="Next">
     </form>
     <a  href="/user_contact"><button id="button1">Back</button></a>
+</div>
 </div>
 </body>
 </html>

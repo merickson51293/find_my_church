@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="{% static 'user_info.css' %}">
 </head>
 <body>
-    <div id="wrapper">
-        <div id="top">
+    <div id="top">
+        <h1>Community Church Finder</h1>
+        <h3>Welcome {{request.session.first_name}} {{request.session.last_name}}</h3>
+    </div>
+    <div id="wrapper" style="background-image: url({% static '/user_reg.jpg' %}">
+        <div id="info">
     <form action="/finish_user" method="POST">
         {% csrf_token %}
-        <p>Any other important information that we should know that will help us find you a church to call home!</p><textarea name="user_info_other" cols="30" rows="10"></textarea>
+        <h3>Any other important information that we should know that will help us find you a church to call home!</h3><textarea name="user_info_other" cols="70" rows="10"></textarea>
     </br>
-        <input type="submit" value="Finish">
+        <input id="button" type="submit" value="Finish">
     </form>
-    <a href="/user_church"><button>Back</button></a>
+    <a href="/user_church"><button id="button1">Back</button></a>
 </div>
 </div>
 </body>
