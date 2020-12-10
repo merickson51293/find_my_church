@@ -18,14 +18,14 @@
         <h3>Communicate with other churches</h3>
         <form action="/church_add_message" method="post">
             {% csrf_token %}
-            <p id="add_message"><textarea type="text" name="message" placeholder="Add message..."></textarea></p>
+            <p id="add_message"><textarea type="text" name="message" cols="50" rows="5"></textarea></p>
             <input id="submit" type="submit" value="Add Message">
         </form>
         </div>
         {% for messages in all_messages %}
         <div id="messages">
             <h3><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h3>
-            <h3>{{messages.message}}</h3>
+            <h3>"{{messages.message}}"</h3>
             {% if messages.user.id == request.session.user_id %}
                 <a href="/delete/{{messages.id}}">Delete</a>
             {% endif %}
@@ -58,7 +58,6 @@
         <div id="messages">
             <h3><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/user_profile/{{messages.user.id}}">{{messages.user.first_name}} {{messages.user.last_name}}</a></h3>
                 <h3>"{{messages.message}}"</h3>
-                <h5>{{messages.user.created_at}}</h5>
         <div id="comment">
             {% for comment in messages.user_post_comments.all %}
             <div id="comment1">
