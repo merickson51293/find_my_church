@@ -1,10 +1,14 @@
+#wrapper{
+    height: 1000px;
+}
+
 div#top{
     border-bottom: black 2px solid;
 }
 
 h1{
     display: inline-block;
-    margin-right: 53%;
+    margin-right: 58%;
 }
 
 div#top > h3{
@@ -15,12 +19,11 @@ div#info{
     text-align: center;
     margin-top: 100px;
     border: black 2px solid;
-
     border-collapse: collapse;
     display: inline-block;
     padding: 25px;
     padding-top: 10px;
-    margin-left: 22%;
+    margin-left: 27%;
 }
 
 #button{
