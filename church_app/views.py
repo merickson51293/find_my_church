@@ -78,11 +78,12 @@ def church_login(request):
             for error in errors:
                 messages.error(request, errors[error])
             return redirect('/church_reg_log')
-        logged_church=Church.objects.filter(admin_email=request.POST['admin_email'])
-        if logged_church:
-            logged_church=logged_church[0]
+        logged_churches=Church.objects.filter(admin_email=request.POST['admin_email'])
+        if logged_churches:
+            logged_church=logged_churches[0]
             if bcrypt.checkpw(request.POST['password'].encode(), logged_church.password.encode()):
                 request.session['church_id']=logged_church.id
+                print(f"Church ID is set {logged_church.id}")
                 request.session['church_name']=f"{logged_church.church_name}"
                 request.session['admin_name']=f"{logged_church.admin_name}"
                 request.session['admin_email']=f"{logged_church.admin_email}"
@@ -202,44 +203,83 @@ def church_main(request):
     }
     return render(request, "church/church_main.html", context)
 
-def church_profile(request, church_id):
-    churchobj=Church.objects.get(id=church_id)
-    if isloggedinuser(request.session):
-        userobj=User.objects.get(id=request.session.user_id)
-        dm = DirectMessages.objects.get(user=userobj, church=churchobj)
-    else:
-        dm = DirectMessages.objects.get(church=churchobj)
-    context={
-        'one_church': churchobj,
-        'dm': dm
-    }
-    return render(request, "church/church_profile.html", context)
+
 
 def logout(request):
     request.session.clear()
     return redirect('/')
 
 def add_message(request):
-    # user_obj=null
-    # church_obj=null
-    # if request.session.UserType==2:
-    #     church_obj=Church.objects.get(id=request.sesssion.church_id)
-    # elif request.session.UserType==1:
-    #     user_obj=User.objects.get(id=request.session.user_id)
     user=User.objects.get(id=request.session['user_id'])
     message = UserMessage.objects.create(message=request.POST['message'], user=user)
     return redirect('/user_home_page')
+
+def church_profile(request, church_id):
+    churchobj=Church.objects.get(id=church_id)
+    if isloggedinuser(request.session):
+        user_id=request.session.get("user_id", "invalid")
+        userobj=User.objects.get(id=user_id)
+        dm = DirectMessages.objects.filter(user=userobj, church=churchobj)
+    else:
+        dm = DirectMessages.objects.filter(church=churchobj)
+    context={
+        'one_church': churchobj,
+        'dm': dm
+    }
+    return render(request, "church/church_profile.html", context)
+
+def user_profile(request, user_id):
+    userobj=User.objects.get(id=user_id)
+    if isloggedinchurch(request.session):
+        church_id=request.session.get("church_id", "invalid")
+        churchobj=Church.objects.get(id=church_id)
+        dm = DirectMessages.objects.filter(user=userobj, church=churchobj)
+    else:
+        dm = DirectMessages.objects.filter(user=userobj)
+    context={
+        'one_user': userobj,
+        'dm': dm
+    }
+    return render(request, "user/user_profile.html", context)
 
 def add_direct_message(request):
     user=User.objects.get(id=request.POST['user_id'])
     church=Church.objects.get(id=request.POST['church_id'])
     dm = DirectMessages.objects.create(dm=request.POST['dm'], user=user, church=church)
     if isloggedinuser(request.session):
-        return redirect('/church_profile')
+        return redirect(f'/direct_messages/{church.id}')
     elif isloggedinchurch(request.session):
-        return redirect('/user_profile')
+        return redirect(f'/direct_messages/{user.id}')
     else:
         return redirect('/')
+
+def direct_messages(request, user_id):
+    userobj=User.objects.get(id=user_id)
+    if isloggedinchurch(request.session):
+        church_id=request.session.get("church_id", "invalid")
+        churchobj=Church.objects.get(id=church_id)
+        dm = DirectMessages.objects.filter(user=userobj, church=churchobj)
+    else:
+        dm = DirectMessages.objects.filter(user=userobj)
+    context={
+        'one_user': userobj,
+        'dm': dm
+    }
+    return render(request, "user/direct_messages.html", context)
+
+def church_direct_messages(request, church_id):
+    churchobj=Church.objects.get(id=church_id)
+    if isloggedinuser(request.session):
+        user_id=request.session.get("user_id", "invalid")
+        userobj=User.objects.get(id=user_id)
+        dm = DirectMessages.objects.filter(user=userobj, church=churchobj)
+    else:
+        dm = DirectMessages.objects.filter(church=churchobj)
+    context={
+        'one_church': churchobj,
+        'dm': dm
+    }
+    return render(request, "church/church_direct_messages.html", context)
 
 def church_add_message(request):
     church=Church.objects.get(id=request.session['church_id'])
@@ -250,6 +290,11 @@ def delete(request, message_id):
     message=UserMessage.objects.get(id=message_id)
     message.delete()
     return redirect('/user_home_page')
+
+def delete_church_message(request, message_id):
+    message=ChurchMessage.objects.get(id=message_id)
+    message.delete()
+    return redirect('/church_home_page')
 
 def delete_church(request, church_id):
     church=Church.objects.get(id=church_id)
@@ -309,6 +354,25 @@ def edit(request, church_id):
     edit.save()
     return redirect(f'/church_profile/{church_id}')
 
+def user_edit(request, user_id):
+    edit = User.objects.get(id=user_id)
+    edit.user_address=request.POST['user_address']
+    edit.user_city=request.POST['user_city']
+    edit.user_state=request.POST['user_state']
+    edit.user_facebook=request.POST['user_facebook']
+    edit.user_instagram=request.POST['user_instagram']
+    edit.adults=request.POST['adults']
+    edit.teens=request.POST['teens']
+    edit.kids=request.POST['kids']
+    edit.user_phone=request.POST['user_phone']
+    edit.denomination=request.POST['denomination']
+    edit.church_size=request.POST['church_size']
+    edit.student_programs=request.POST['student_programs']
+    edit.small_groups=request.POST['small_groups']
+    edit.user_info_other=request.POST['user_info_other']
+    edit.save()
+    return redirect(f'/user_profile/{user_id}')
+
 def church_add_comment(request, message_id):
     church = Church.objects.get(id=request.session['church_id'])
     message = ChurchMessage.objects.get(id=message_id)
@@ -326,18 +390,10 @@ def delete_comment(request, comment_id):
     comment.delete()
     return redirect('/user_home_page')
 
-def user_profile(request, user_id):
-    userobj=User.objects.get(id=user_id)
-    if isloggedinchurch(request.session):
-        churchobj=Church.objects.get(id=request.session.church_id)
-        dm = DirectMessages.objects.get(user=userobj, church=churchobj)
-    else:
-        dm = DirectMessages.objects.get(user=userobj)
-    context={
-        'one_user': userobj,
-        'dm': dm
-    }
-    return render(request, "user/user_profile.html", context)
+def delete_church_comment(request, comment_id):
+    comment=ChurchComments.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('/church_home_page')
 
 def image_upload_view(request):
     """Process images uploaded by users"""
@@ -363,3 +419,4 @@ def area_churches(request):
         'area_church': Church.objects.all()
     }
     return render(request, "area_churches.html", context)
+

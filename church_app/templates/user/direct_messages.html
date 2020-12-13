@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Profile</title>
+    {% load static %}{% block content %}
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+</head>
+<body>
+    <h2>{{one_user.first_name}} {{one_user.last_name}}'s Direct Messages</h2>
+    <form action="/add_direct_message" method="post">
+        {% csrf_token %}
+        <p id="add_message"><textarea type="text" name="dm" placeholder="Add message..."></textarea></p>
+        <input type="hidden" name="user_id" value={{one_user.id}}>
+        <input type="hidden" name="church_id" value={{request.session.church_id}}>
+        <input id="submit" type="submit" value="Add Message">
+    </form>
+    {% for direct in dm %}
+        <p>{{direct.dm}}</p>
+        <p>{{direct.church.church_name}}</p>
+    {% endfor %}
+    {% endblock %}
+</body>
+</html>

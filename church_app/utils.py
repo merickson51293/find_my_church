@@ -1,10 +1,12 @@
 def isloggedinuser(session):
-    if session.user_id is None:
+    user_id=session.get("user_id", "invalid")
+    if user_id=="invalid":
         return False
     return True
 
 
 def isloggedinchurch(session):
-    if session.church_id is None:
+    church_id=session.get("church_id", "invalid")
+    if church_id=="invalid":
         return False
     return True

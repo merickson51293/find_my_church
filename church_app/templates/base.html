@@ -19,7 +19,7 @@
               </div>
             
             {% if request.session.user_id is none %}
-            <img id="nav_icons" src="{% static '/message.png' %}" alt="messages">
+            <a href="/church_direct_messages/{{request.session.church_id}}"><img id="nav_icons" src="{% static '/message.png' %}" alt="messages"></a>
             <a href="/church_profile/{{request.session.church_id}}"><img id="nav_icons" src="{% static '/church.png' %}" alt="church"></a>
             <a href="/local_people"><img id="nav_icons" src="{% static '/profile.png' %}" alt="profile"></a>
             <a class="profile" href="/church_home_page"><img id="nav_icons" src="{% static '/home.png' %}" alt="profile"></a>

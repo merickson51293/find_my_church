@@ -27,7 +27,7 @@
             <h3><img id="smallpic" src="{% static '/profile_pic.png' %}" alt="Profile Pic"> <a href="/church_profile/{{messages.church.id}}">{{messages.church.church_name}}</a></h3>
             <h3>"{{messages.message}}"</h3>
             {% if messages.user.id == request.session.user_id %}
-                <a href="/delete/{{messages.id}}">Delete</a>
+                <a href="/delete_church_message/{{messages.id}}" onclick="return confirm('Are you sure you want to delete this message?');">Delete</a>
             {% endif %}
             <div id="comment">
                 {% for comment in messages.church_post_comments.all %}
@@ -36,7 +36,7 @@
                     <p>{{comment.comment}}</p>
                     
                     {% if comment.church.id == request.session.church_id %}
-                    <a href="/delete_comment/{{comment.id}}">Delete</a>
+                    <a href="/delete_church_comment/{{comment.id}}" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</a>
                     {% endif %}
                 </div>
                     {% endfor %}
