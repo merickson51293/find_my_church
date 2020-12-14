@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Profile</title>
     {% load static %}{% block content %}
-    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="{% static 'church_dm.css' %}">
 </head>
 <body>
+    <div id="top_dm">
     <h2>Messages sent from {{request.session.church_name}}</h2>
     <form action="/add_direct_message" method="post">
         {% csrf_token %}
@@ -17,10 +18,13 @@
         <input type="hidden" name="church_id" value={{request.session.church_id}}>
         <input id="submit" type="submit" value="Add Message">
     </form>
+</div>
+<div id="dm">
     {% for direct in dm %}
-        <p>{{direct.dm}}</p>
+        <h3>{{direct.dm}}</h3>
         <p>{{direct.user.first_name}} {{direct.user.last_name}}</p>
     {% endfor %}
     {% endblock %}
+</div>
 </body>
 </html>

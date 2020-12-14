@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block content %}
     <title>Church Profile</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'profile.css' %}">
-    {% block content %}
+    
+    <link rel="stylesheet" href="{% static 'church_profile.css' %}">
+    
     <script defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrniwZJcCz-23od5YakpQSe3pOIslnYc&callback=initMap">
     </script>
@@ -16,7 +18,6 @@
       #map {
         height: 400px;
         /* The height is 400 pixels */
-        width: 30%;
         /* The width is the width of the web page */
       }
     </style>
@@ -41,12 +42,13 @@
     </script>
 </head>
 <body>
-    
-    <h2>{{one_church.church_name}}</h2>
-    <p id="address">Street Address: {{one_church.address}}</p>
-    <p>City and State: {{one_church.church_city}}, {{one_church.church_state}}</p>
-    
-    <div id="map"></div>
+  <h2>{{one_church.church_name}}</h2>
+    <div id="left">
+      <p id="address">Street Address: {{one_church.address}}</p>
+      <p>City and State: {{one_church.church_city}}, {{one_church.church_state}}</p>
+      <div id="map"></div>
+    </div>
+    <div id="right">
     <h4>Social Media</h4>
     <p>Facebook: <a href="https://www.{{one_church.facebook}}">{{one_church.facebook}}</a></p>
     <p>Instagram: {{one_church.instagram}}</p>
@@ -62,10 +64,13 @@
     <p>Percentage of 30-50 year olds: {{one_church.old}}%</p>
     <p>Percentage of 50+ year olds: {{one_church.oldest}}%</p>
     <p>Other Info: {{one_church.other}}</p>
-    <p>Pastors</p>
+  </div>
+  <div id="pastors">
+    <h2>Pastors</h2>
     {% for pastor in one_church.church_pastor.all %}
     <p>Senior Pastor {{pastor.pastor_name}}</p>
     {% endfor %}
+  </div></br>
         {% if one_church.id == request.session.church_id %}
         <a href="/edit_church/{{one_church.id}}">Edit Your Church</a>
         {% endif %}

@@ -12,7 +12,7 @@
 <body>
     <h3>Local Area Churches</h3>
     {% for church in area_church %}
-    <h2><a href="/church_profile/{{church.id}}">{{church.church_name}}</a></h2>
+    <h3><a href="/church_profile/{{church.id}}">{{church.church_name}}</a></h3>
     <p>Location: {{church.church_city}}, {{church.church_state}}</p>
     <p>Denomination: {{church.denomination}}</p>
     {% endfor %}
