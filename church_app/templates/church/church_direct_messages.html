@@ -10,19 +10,23 @@
 </head>
 <body>
     <div id="top_dm">
-    <h2>Messages sent from {{request.session.church_name}}</h2>
-    <form action="/add_direct_message" method="post">
+    <h2 style="text-decoration:underline">Messages sent from {{request.session.church_name}}</h2>
+    <!-- <form action="/add_direct_message" method="post">
         {% csrf_token %}
         <p id="add_message"><textarea type="text" name="dm" placeholder="Add message..."></textarea></p>
         <input type="hidden" name="user_id" value={{one_user.id}}>
         <input type="hidden" name="church_id" value={{request.session.church_id}}>
         <input id="submit" type="submit" value="Add Message">
-    </form>
+    </form> -->
 </div>
 <div id="dm">
     {% for direct in dm %}
-        <h3>{{direct.dm}}</h3>
-        <p>{{direct.user.first_name}} {{direct.user.last_name}}</p>
+        <h4>{{direct.dm}}</h4>
+        <p>- <a href="/user_profile/{{direct.user.id}}">{{direct.user.first_name}} {{direct.user.last_name}}</a></p>
+    {% endfor %}
+    {% for users in all_users %}
+    <h4 style="text-align:center">Other Users to Message</h4>
+        <a href="/direct_messages/{{users.id}}"><p style="text-align:center">{{users.first_name}} {{users.last_name}}</a></p>
     {% endfor %}
     {% endblock %}
 </div>

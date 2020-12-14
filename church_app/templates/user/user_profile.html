@@ -38,12 +38,13 @@
                 <a href="/edit_user/{{one_user.id}}">Edit Your User</a>
                 {% endif %}
             </div>
+        </div>
             {% if request.session.user_id is none %}
-        <div id="user_wall">
-            <h3><a href="/direct_messages/{{one_user.id}}">Leave a direct message for {{one_user.first_name}} {{one_user.last_name}}!</a></h3>
+            <div id="user_wall">
+                <h3><a href="/direct_messages/{{one_user.id}}">Leave a direct message for {{one_user.first_name}} {{one_user.last_name}}!</a></h3>
             </div>
             {% endif %}
-    </div>
+    
     {% endblock %}
 </body>
 </html>

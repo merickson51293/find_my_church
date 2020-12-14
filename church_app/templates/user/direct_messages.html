@@ -11,18 +11,20 @@
 <body>
     <div id="top_dm">
     <h2>{{one_user.first_name}} {{one_user.last_name}}'s Direct Messages</h2>
-    <form action="/add_direct_message" method="post">
+    {% if request.session.user_id is none %}
+        <form action="/add_direct_message" method="post">
         {% csrf_token %}
-        <p id="add_message"><textarea type="text" name="dm" placeholder="Add message..."></textarea></p>
+        <p id="add_message"><textarea type="text" name="dm" placeholder="Add message..." cols="50" rows="5"></textarea></p>
         <input type="hidden" name="user_id" value={{one_user.id}}>
         <input type="hidden" name="church_id" value={{request.session.church_id}}>
         <input id="submit" type="submit" value="Add Message">
     </form>
+    {% endif %}
 </div>
 <div id="dm">
     {% for direct in dm %}
-        <h3>{{direct.dm}}</h3>
-        <p>{{direct.church.church_name}}</p>
+        <h4>{{direct.dm}}</h4>
+        <p>- <a href="/church_profile/{{direct.church.id}}">{{direct.church.church_name}}</a></p>
     {% endfor %}
 </div>
     {% endblock %}

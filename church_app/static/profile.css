@@ -63,3 +63,8 @@ div#top > a{
     width: 400px;
     height: 400px;
 }
+
+h3{
+    margin-top: 10px;
+    text-align: center;
+}

@@ -49,26 +49,28 @@
       <div id="map"></div>
     </div>
     <div id="right">
-    <h4>Social Media</h4>
-    <p>Facebook: <a href="https://www.{{one_church.facebook}}">{{one_church.facebook}}</a></p>
-    <p>Instagram: {{one_church.instagram}}</p>
+      <h2>Church Info</h2>
+      <p>Denomination: {{one_church.denomination}}</p>
+    <p>Values and Beliefs: <a href="{{one_church.values}}">{{one_church.values}}</a></p>
     <p>Church Email: {{one_church.church_email}}</p>
     <p>Church Phone Number: {{one_church.church_phone}}</p>
     <p>Website: <a href="https://www.{{one_church.website}}">{{one_church.website}}</a></p>
-    <p>Denomination: {{one_church.denomination}}</p>
-    <p>Values and Beliefs: <a href="{{one_church.values}}">{{one_church.values}}</a></p>
+    
     <p>Church Size: {{one_church.size}}</p>
     <p>Percentage of 0-10 year olds: {{one_church.youngest}}%</p>
     <p>Percentage of 10-20 year olds: {{one_church.younger}}%</p>
     <p>Percentage of 20-30 year olds: {{one_church.young}}%</p>
     <p>Percentage of 30-50 year olds: {{one_church.old}}%</p>
     <p>Percentage of 50+ year olds: {{one_church.oldest}}%</p>
+    <h4>Social Media</h4>
+    <p>Facebook: <a href="https://www.{{one_church.facebook}}">{{one_church.facebook}}</a></p>
+    <p>Instagram: {{one_church.instagram}}</p>
     <p>Other Info: {{one_church.other}}</p>
   </div>
   <div id="pastors">
     <h2>Pastors</h2>
     {% for pastor in one_church.church_pastor.all %}
-    <p>Senior Pastor {{pastor.pastor_name}}</p>
+    <p><b>{{pastor.pastor_title}}</b> - {{pastor.pastor_name}}</p>
     {% endfor %}
   </div></br>
         {% if one_church.id == request.session.church_id %}

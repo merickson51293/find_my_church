@@ -24,7 +24,7 @@ div#top{
 h2{
     text-align: center;
     margin-top: 2%;
-    margin-bottom: 3%;
+
 }
 
 a.profile{
@@ -116,4 +116,8 @@ div#top_right{
     margin-top: 5px;
     padding-top: 1px;
     padding-bottom: 1px;
+}
+
+h3{
+    text-align: center;
 }

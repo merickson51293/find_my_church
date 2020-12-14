@@ -277,7 +277,8 @@ def church_direct_messages(request, church_id):
         dm = DirectMessages.objects.filter(church=churchobj)
     context={
         'one_church': churchobj,
-        'dm': dm
+        'dm': dm,
+        'all_users': User.objects.all
     }
     return render(request, "church/church_direct_messages.html", context)
 
