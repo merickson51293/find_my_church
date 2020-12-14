@@ -12,8 +12,10 @@
     {% block content %}
     <h2>Finding a church to call home is one of the hardest and most important decisions you can make. We here at Community Church Finder are here to help you in that process. This site is designed for both churches and families, to be able to find one another and see if they are the right fit.</h2>
     <div id="top_left1">
-        <h3><a id="none" href="/area_churches">Possible Churches in your area</a></h3>
-        <h3><a id="none" href="/local_people">People in your area</a></h3> 
+        <h3><a id="none" href="/area_churches">Possible Churches in your area</h3>
+        <img id="picture" src="{% static '/church_1.jpg' %}" alt="church"></a>
+        <h3><a id="none" href="/local_people">People in your area</h3> 
+        <img id="picture" src="{% static '/church_2.jpg' %}" alt="congregation"></a>
     </div>
     <div id="top_right">
         <div id="wall">
@@ -35,8 +37,6 @@
                 <a href="/delete_comment/{{comment.id}}" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</a>
                 {% endif %}</p>
                 <p>{{comment.comment}}</p>
-                
-                
             </div>
                 {% endfor %}
             <form action="/user_add_comment/{{messages.id}}" method="post">
