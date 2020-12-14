@@ -25,10 +25,14 @@ button{
 }
 
 h1{
-    padding-left: 20px;
     display: inline-block;
     width: 35%;
     margin-right:40%;
+    text-align: center;
+    margin-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
 }
 a{
     text-decoration: none;
