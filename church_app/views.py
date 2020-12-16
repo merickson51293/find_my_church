@@ -104,7 +104,6 @@ def create_user_contact(request):
         request.session['user_email']=f"{request.POST['user_email']}"
         request.session['user_facebook']=f"{request.POST['user_facebook']}"
         request.session['user_instagram']=f"{request.POST['user_instagram']}"
-        request.session['user_twitter']=f"{request.POST['user_twitter']}"
         request.session['adults']=f"{request.POST['adults']}"
         request.session['teens']=f"{request.POST['teens']}"
         request.session['kids']=f"{request.POST['kids']}"

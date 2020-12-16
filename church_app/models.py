@@ -107,7 +107,6 @@ class Church(models.Model):
     website=models.CharField(max_length=255)
     facebook=models.CharField(max_length=255)
     instagram=models.CharField(max_length=255)
-    twitter=models.CharField(max_length=255)
     church_email=models.CharField(max_length=255)
     church_phone=models.CharField(max_length=13)
     denomination=models.CharField(max_length=255)

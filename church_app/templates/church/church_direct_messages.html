@@ -24,10 +24,13 @@
         <h4>{{direct.dm}}</h4>
         <p>- <a href="/user_profile/{{direct.user.id}}">{{direct.user.first_name}} {{direct.user.last_name}}</a></p>
     {% endfor %}
+    <div id="border">
+    <h4 style="text-align:center">Users to Message</h4>
     {% for users in all_users %}
-    <h4 style="text-align:center">Other Users to Message</h4>
+    
         <a href="/direct_messages/{{users.id}}"><p style="text-align:center">{{users.first_name}} {{users.last_name}}</a></p>
     {% endfor %}
+</div>
     {% endblock %}
 </div>
 </body>
