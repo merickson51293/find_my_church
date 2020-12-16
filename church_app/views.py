@@ -196,14 +196,6 @@ def church_pastor(request):
     }
     return render(request, "church_reg/church_pastor.html", context)
 
-def church_main(request):
-    context={
-       'all_churches': Church.objects.all() 
-    }
-    return render(request, "church/church_main.html", context)
-
-
-
 def logout(request):
     request.session.clear()
     return redirect('/')

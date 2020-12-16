@@ -33,7 +33,6 @@ urlpatterns = [
     path('create_church_info_other', views.create_church_info_other),
     path('church_info_other', views.church_info_other),
     path('church_success', views.church_success),
-    path('church_main', views.church_main),
     path('church_profile/<int:church_id>', views. church_profile),
     path('edit_church/<int:church_id>', views.edit_church),
     path('edit/<int:church_id>', views.edit),
