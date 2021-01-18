@@ -11,7 +11,7 @@
 <body>
     
     <div id="profilepic">
-        <img id="profile" src="{% static '/profile_pic.png' %}" alt="profile pic">
+        <img id="profile" src="{{one_user.prof_picture.url}}" alt="profile pic">
         <h2>{{one_user.first_name}} {{one_user.last_name}}</h2>
     </div>
     <div id="user_info">

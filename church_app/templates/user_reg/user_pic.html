@@ -16,11 +16,7 @@
     <div id="wrapper" style="background-image: url({% static '/user_reg.jpg' %}">
     <div id="info">
     <h2>Please upload a profile picture!</h2>
-    <form method = "post" enctype="multipart/form-data"> 
-        {% csrf_token %} 
-        {{form.as_p}} 
-        <input id="button" type="submit" value="Upload"> 
-    </form> 
+    
     <a href="/user_home_page"><button id="button1">Skip</button></a>
 </div>
 </div>

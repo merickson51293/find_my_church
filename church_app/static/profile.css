@@ -11,9 +11,9 @@
 
 #profile{
     margin-top: 10px;
-    width: 200px;
+    width: 300px;
     display: inline-block;
-    
+    border-radius: 50px;
 }
 
 #user_info{

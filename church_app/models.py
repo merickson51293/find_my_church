@@ -1,10 +1,6 @@
 from django.db import models
 import re, bcrypt
-# from enum import Enum
 
-# class UserType(Enum):
-#     User = 1
-#     Church = 2
 
 class UserManager(models.Manager):
     def validator(self, postdata):
@@ -61,9 +57,12 @@ class User(models.Model):
     student_programs=models.CharField(max_length=255)
     small_groups=models.CharField(max_length=255)
     user_info_other=models.TextField()
+    prof_picture=models.ImageField(upload_to ='imgs/')
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     objects=UserManager()
+    def __str__(self):
+        return f"{self.first_name, self.last_name}"
 
 class UserPic(models.Model):
     user_Img=models.ImageField(upload_to='images')
@@ -121,6 +120,8 @@ class Church(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     objects=ChurchManager()
+    def __str__(self):
+        return f"{self.church_name}"
 
 class Pastor(models.Model):
     pastor_name=models.CharField(max_length=255)

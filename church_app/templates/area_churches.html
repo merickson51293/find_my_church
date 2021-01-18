@@ -12,9 +12,11 @@
 <body>
     <h3>Local Area Churches</h3>
     {% for church in area_church %}
+    {% if church.denomination == one_user.denomination and church.church_state == one_user.user_state %}
     <h4><a href="/church_profile/{{church.id}}">{{church.church_name}}</a></h4>
     <p>Location: {{church.church_city}}, {{church.church_state}}</p>
     <p>Denomination: {{church.denomination}}</p>
+    {% endif %}
     {% endfor %}
     {% endblock %}
 </body>

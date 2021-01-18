@@ -400,15 +400,17 @@ def image_upload_view(request):
         form = ImageForm()
     return render(request, 'user_reg/user_info_other.html', {'form': form})
 
-def local_people(request):
+def local_people(request, user_id):
     context={
-        'local_person': User.objects.all()
+        'local_person': User.objects.all(),
+        'one_user': User.objects.get(id=user_id)
     }
     return render(request, "local_people.html", context)
 
-def area_churches(request):
+def area_churches(request, user_id):
     context={
-        'area_church': Church.objects.all()
+        'area_church': Church.objects.all(),
+        'one_user': User.objects.get(id=user_id)
     }
     return render(request, "area_churches.html", context)
 
